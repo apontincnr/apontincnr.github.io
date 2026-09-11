@@ -1,0 +1,1812 @@
+<title>Antonio Pontin</title>
+<meta name="description" content="Experimental quantum optomechanics — levitated nanoparticles, precision sensing, and fundamental physics at the quantum limit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Source+Sans+3:ital,opsz,wght@0,9..46,300;0,9..46,400;0,9..46,600;1,9..46,400&display=swap">
+
+<style>
+/* ── TOKENS ───────────────────────────────────────────────── */
+:root {
+  --bg:        #F5F7FA;
+  --surface:   #FFFFFF;
+  --surface-2: #EBF0F8;
+  --text:      #1C2B40;
+  --text-2:    #4A5E77;
+  --text-3:    #8899AD;
+  --accent:    #3A6BBF;
+  --accent-lt: #D5E4F7;
+  --border:    #C8D6E8;
+  --rule:      #D8E3EE;
+  --shadow:    0 1px 4px rgba(28,43,64,.07);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #0C1220;
+    --surface:   #131D2E;
+    --surface-2: #1A2740;
+    --text:      #DDE5F0;
+    --text-2:    #7A95B4;
+    --text-3:    #4A6080;
+    --accent:    #6B9FE4;
+    --accent-lt: #152035;
+    --border:    #1E2E45;
+    --rule:      #1A2B40;
+    --shadow:    0 1px 6px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:        #0C1220;
+  --surface:   #131D2E;
+  --surface-2: #1A2740;
+  --text:      #DDE5F0;
+  --text-2:    #7A95B4;
+  --text-3:    #4A6080;
+  --accent:    #6B9FE4;
+  --accent-lt: #152035;
+  --border:    #1E2E45;
+  --rule:      #1A2B40;
+  --shadow:    0 1px 6px rgba(0,0,0,.4);
+}
+
+/* ── RESET ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── NAV ──────────────────────────────────────────────────── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 980px;
+  margin-inline: auto;
+  padding-inline: 28px;
+  padding-block: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px 2rem;
+  flex-wrap: wrap;
+}
+.nav-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: .02em;
+  color: var(--text);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+nav { display: flex; flex-wrap: wrap; gap: 0; }
+nav a {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-decoration: none;
+  padding: 5px 11px;
+  border-radius: 4px;
+  transition: color .15s, background .15s;
+}
+nav a:hover { color: var(--text-2); }
+nav a.active { color: var(--accent); background: var(--accent-lt); }
+
+/* ── LAYOUT SHELL ─────────────────────────────────────────── */
+.page-section {
+  flex: 1;
+  max-width: 980px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 28px;
+  padding-block: 60px 80px;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.page-section.visible { opacity: 1; }
+
+/* ── SHARED TYPOGRAPHY ────────────────────────────────────── */
+.cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+}
+h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 24px;
+  text-wrap: balance;
+}
+h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+p { margin-bottom: 14px; color: var(--text-2); }
+p:last-child { margin-bottom: 0; }
+p strong { color: var(--text); font-weight: 600; }
+p em { font-style: italic; }
+
+/* ── PAGE HEADER (used on inner pages) ───────────────────── */
+.pg-header {
+  margin-bottom: 44px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.pg-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ── MARGIN-GRID (used on Research, Grants, Talks, CV) ───── */
+.mgrid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0 44px;
+}
+.mgrid-label {
+  padding-top: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  line-height: 1.4;
+}
+.mgrid-body {
+  border-left: 1px solid var(--rule);
+  padding-left: 32px;
+}
+.mgrid-block {
+  margin-bottom: 48px;
+  display: contents; /* makes each block a pair of grid cells */
+}
+
+/* manual pairs approach */
+.mgrid-pair {
+  display: contents;
+}
+
+/* ── ABOUT PAGE ───────────────────────────────────────────── */
+.hero-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(44px, 8vw, 72px);
+  font-weight: 300;
+  letter-spacing: -.01em;
+  line-height: 1.02;
+  color: var(--text);
+  text-wrap: balance;
+  margin-bottom: 20px;
+}
+.hero-name em { font-style: italic; color: var(--accent); }
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-bottom: 28px;
+}
+.hero-tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.hero-bio {
+  max-width: 600px;
+  font-size: 16px;
+  line-height: 1.72;
+  color: var(--text-2);
+  margin-bottom: 20px;
+}
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 11px;
+  transition: color .15s, border-color .15s, background .15s;
+}
+.profile-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-lt);
+}
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 48px;
+  align-items: start;
+}
+.hero-portrait {
+  width: 200px;
+  height: 220px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 2px 16px rgba(28,43,64,.15);
+}
+.hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+@media (max-width: 560px) {
+  .hero-layout { grid-template-columns: 1fr; }
+  .hero-portrait { width: 120px; height: 132px; margin-bottom: 20px; }
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 680px;
+  margin-bottom: 52px;
+}
+.about-stat {
+  background: var(--surface);
+  padding: 20px 22px;
+}
+.about-stat-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.about-stat-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.about-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  max-width: 820px;
+}
+.pillar {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 20px;
+  background: var(--surface);
+}
+.pillar-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--text);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+.pillar-body { font-size: 13.5px; color: var(--text-2); line-height: 1.55; }
+
+/* ── RESEARCH PAGE ─────────────────────────────────────────── */
+.research-block { margin-bottom: 48px; }
+.research-block:last-child { margin-bottom: 0; }
+.research-block h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 21px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+/* ── PUBLICATIONS PAGE ─────────────────────────────────────── */
+.pub-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.pub-filter-btn {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.pub-filter-btn:hover, .pub-filter-btn.active {
+  color: var(--accent);
+  background: var(--accent-lt);
+  border-color: var(--accent);
+}
+.pub-year-group { margin-bottom: 32px; }
+.pub-year-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-list { list-style: none; }
+.pub-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 0 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-item:last-child { border-bottom: none; }
+.pub-num { font-size: 11px; color: var(--text-3); padding-top: 2px; text-align: right; font-variant-numeric: tabular-nums; }
+.pub-title { font-size: 14.5px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 3px; }
+.pub-authors { font-size: 13px; color: var(--text-2); font-style: italic; margin-bottom: 3px; }
+.pub-authors strong { font-style: normal; font-weight: 600; color: var(--text); }
+.pub-ref { font-size: 12.5px; color: var(--accent); font-weight: 600; }
+.pub-preprint { font-size: 12.5px; color: var(--text-3); font-weight: 600; }
+.highlight-badge {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 6px;
+  margin-right: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* ── NEWS PAGE ─────────────────────────────────────────────── */
+.news-list { list-style: none; }
+.news-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0 28px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.news-item:last-child { border-bottom: none; }
+.news-date {
+  font-size: 11.5px;
+  color: var(--text-3);
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding-top: 3px;
+}
+.news-tag {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 1px 6px;
+  margin-bottom: 7px;
+}
+.news-tag.pub    { background: #EBF5EB; color: #2A7A3A; }
+.news-tag.talk   { background: #EBF0FB; color: #3A55A0; }
+.news-tag.award  { background: #FDF4E7; color: #A06020; }
+.news-tag.preprint { background: var(--surface-2); color: var(--text-3); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .news-tag.pub    { background: #0D2410; color: #5EBB72; }
+  :root:not([data-theme="light"]) .news-tag.talk   { background: #0D1730; color: #7A95E0; }
+  :root:not([data-theme="light"]) .news-tag.award  { background: #241500; color: #D4904A; }
+  :root:not([data-theme="light"]) .news-tag.preprint { background: var(--surface-2); color: var(--text-3); }
+}
+:root[data-theme="dark"] .news-tag.pub    { background: #0D2410; color: #5EBB72; }
+:root[data-theme="dark"] .news-tag.talk   { background: #0D1730; color: #7A95E0; }
+:root[data-theme="dark"] .news-tag.award  { background: #241500; color: #D4904A; }
+:root[data-theme="dark"] .news-tag.preprint { background: var(--surface-2); color: var(--text-3); }
+.news-headline {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+.news-body { font-size: 13.5px; color: var(--text-2); line-height: 1.55; }
+
+/* ── GRANTS PAGE ───────────────────────────────────────────── */
+.grant-item { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.grant-item:last-child { border-bottom: none; }
+.grant-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.grant-meta { font-size: 13px; color: var(--text-2); }
+
+/* ── TALKS PAGE ─────────────────────────────────────────────── */
+.talk-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.talk-item:last-child { border-bottom: none; }
+.talk-date { font-size: 12px; color: var(--text-3); padding-top: 3px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.talk-title { font-size: 14.5px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 3px; }
+.talk-venue { font-size: 13px; color: var(--text-2); }
+.inv-badge {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-lt);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-right: 5px;
+  vertical-align: middle;
+  position: relative; top: -1px;
+}
+
+/* ── CV PAGE ────────────────────────────────────────────────── */
+.cv-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  margin-top: 36px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+}
+.cv-section-title:first-child { margin-top: 0; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 0 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.timeline-item:last-child { border-bottom: none; }
+.tl-date { font-size: 12px; color: var(--text-3); padding-top: 2px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.tl-role { font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.tl-org { font-size: 13px; color: var(--text-2); margin-bottom: 4px; }
+.tl-detail { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+
+/* ── CONTACT PAGE ───────────────────────────────────────────── */
+/* ── MEDIA ────────────────────────────────────────────────── */
+.media-intro {
+  max-width: 620px;
+  color: var(--text-2);
+  margin-bottom: 40px;
+  line-height: 1.75;
+}
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.media-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .15s, box-shadow .15s;
+}
+.media-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(58,107,191,.12);
+}
+.media-card-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.media-card-thumb iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.media-card-body {
+  padding: 16px 18px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.media-card-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.media-card-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text);
+}
+.media-card-desc {
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.6;
+  flex: 1;
+}
+.media-card-link {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.media-card-link:hover { text-decoration: underline; }
+.media-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-2);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.media-press-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 640px;
+}
+.media-press-list li {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+  color: var(--text-2);
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+.media-press-outlet {
+  font-weight: 600;
+  color: var(--text);
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.contact-block { max-width: 520px; }
+.contact-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.contact-row:last-child { border-bottom: none; }
+.contact-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.contact-value { font-size: 14.5px; color: var(--text-2); }
+.contact-value a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.contact-value a:hover { text-decoration: underline; }
+
+/* ── FOCUS ──────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 660px) {
+  .nav-inner { padding-inline: 16px; }
+  .page-section { padding-inline: 16px; padding-block: 40px 60px; }
+  nav a { padding: 4px 8px; font-size: 10.5px; }
+  .mgrid { grid-template-columns: 1fr; gap: 0; }
+  .mgrid-body { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 16px; margin-top: 8px; }
+  .hero-name { margin-bottom: 16px; }
+  .about-stat-num { font-size: 30px; }
+  .timeline-item { grid-template-columns: 100px 1fr; gap: 0 12px; }
+  .talk-item { grid-template-columns: 72px 1fr; gap: 0 12px; }
+  .news-item { grid-template-columns: 90px 1fr; gap: 0 16px; }
+  .contact-row { grid-template-columns: 90px 1fr; gap: 0 12px; }
+  .pub-item { grid-template-columns: 20px 1fr; gap: 0 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, .page-section { transition: none !important; }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════
+     HEADER / NAV
+═══════════════════════════════════════════════════════════════ -->
+<header>
+  <div class="nav-inner">
+    <a href="#about" class="nav-name">Antonio Pontin</a>
+    <nav id="main-nav">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#news">News</a>
+      <a href="#grants">Grants</a>
+      <a href="#talks">Talks</a>
+      <a href="#cv">CV</a>
+      <a href="#media">Media</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: ABOUT
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="about">
+  <div class="hero-layout">
+  <div class="hero-text">
+  <h1 class="hero-name">Antonio <em>Pontin</em></h1>
+  <div class="hero-meta">
+    <span class="hero-tag">Ph.D. · Experimental Quantum Physics</span>
+    <span class="hero-tag">CNR – Istituto Nazionale di Ottica, Sesto Fiorentino</span>
+    <span class="hero-tag">University College London (Honorary)</span>
+  </div>
+  <div class="profile-links">
+    <a class="profile-link" href="https://orcid.org/0000-0002-9705-697X" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.516.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 3.872-2.484 3.872-3.722 0-2.016-1.284-3.722-3.862-3.722h-2.307z"/></svg>
+      ORCID
+    </a>
+    <a class="profile-link" href="https://www.scopus.com/authid/detail.uri?authorId=23989469900" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.8 0H4.2C1.88 0 0 1.88 0 4.2v15.6C0 22.12 1.88 24 4.2 24h15.6c2.32 0 4.2-1.88 4.2-4.2V4.2C24 1.88 22.12 0 19.8 0zm-6.55 18.17c-2.83.68-5.9-.57-7.16-3.16-.07-.16-.13-.32-.19-.48l2.25-.92c.35 1.39 1.56 2.46 3.07 2.46 1.55 0 2.71-.98 2.71-2.32 0-1.48-1.31-2.07-3.23-2.87-1.64-.69-3.63-1.55-3.63-3.93 0-2.15 1.81-3.76 4.2-3.76 1.87 0 3.43.96 4.17 2.46l-1.96 1.19c-.41-.82-1.2-1.37-2.21-1.37-1.07 0-1.87.63-1.87 1.48 0 1.08 1.15 1.54 2.77 2.19 2.04.81 4.13 1.72 4.13 4.2 0 2.22-1.59 3.82-3.02 4.13z"/></svg>
+      Scopus
+    </a>
+    <a class="profile-link" href="https://scholar.google.it/citations?user=Y1ROF2UAAAAJ&hl=en" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5z"/></svg>
+      Scholar
+    </a>
+  </div>
+  </div><!-- /.hero-text -->
+  <div class="hero-portrait">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUEBAUEAwUFBAUGBgUGCA4JCAcHCBEMDQoOFBEVFBMRExMWGB8bFhceFxMTGyUcHiAhIyMjFRomKSYiKR8iIyL/2wBDAQYGBggHCBAJCRAiFhMWIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAGjAZADASIAAhEBAxEB/8QAHAAAAgIDAQEAAAAAAAAAAAAAAAECBQMEBgcI/8QAQRAAAQQBAwIEAwYFAwMCBgMAAQACAxEEBRIhMUEGE1FhInGBBxQykaGxI0JSwdEV4fAzYnIkkhYlNIKi8UNjwv/EABoBAQEAAwEBAAAAAAAAAAAAAAABAgMEBQb/xAAmEQEBAAICAwADAQACAwEAAAAAAQIRAyEEEjETIkFRYXEUIzIz/9oADAMBAAIRAxEAPwD49ATpMJ0iI0mAnSdIEnSaEBSE6QgKRSdJ0gVJ0hOlYhJgJ0hAUhOkUgSE6QiCkUmhAqRSaECpFJoRSpCdIpEJNOkIEkmhBEoTQgiik0IuypJSQgilSlSEEUJopBGklJKkEaQpUlSCNJUp0lSCKRUklFQKishCgUGUJopNAITpCApCadIEnSE6QCKTQqgQmhEJNNCBJorlOkCRSaEAhCdIEpBttJHbqEqWSFzWTMc8WwH4h6jugxIWWaIxSEH8P8rj3HYrGOen6IEhTMbh1a4fRIC+9BBFCZA9UkAkmhAkIQgSE0IEkpJIEhCECQmhBFFKSEVGkqUkkCSKZQgiUk0FRUCoFZCoFBlTpCaARSaaBJ0ik1UFITpFIEmmhECEIQoQEJoBCEIBNCaBUmpBpLbrqaC3YNLlmi8xz2RMqwX38Q9gg0FljgfMTsa71PHQevyVi7RJA/YyeKSXr5TCN/5Hp8uqv9MbDDBK+dsjYsh1PiksOH17gGzX+ENuSjyn4/EDiB78g/Tosv8AqeWWhu9m0dG+UyvypXmV4We3VnwOf92ZuHxvIcA09HADkg9QrGLwcxsAdFkYkznE7Wm3OeB146cenVVNxzbdUkfF5cmn4j5DwJmRujf+bCAfqFihlx35Hl5MO0ct3MJJHz9V0WLoUGRkuZKIontaSSwBoAHo6669itZ+lyR5T4pYw6viEu0hrQbr3JsUByibVk2gZTcb71CPMwyTtmbzf0616nt3pVXlP27tpLfUdF6lDi4OBo0ERdktl3OllJ2VGbo1yAHcdiSKVfNoZygJcGXMka/4vMaHAD0s8jn6Jo3r687LSGg1wehSpdln6LJiRh80T5Wg8zPje3afQ1wR7k8qlk07zcl0IjZHKTTDG4bXn0q1NLtTIUiKJ9UkVFCaRQCSaRQJCEwgVJpoQJJSUUAVFSSpAkk0UiopUp0kioEKBWQhQI5UGakI+SdIBNCFU2E0JogQhNAkJpIBCEUhTQhMIBFJrf03SMnU5XCFu2KMbpZn/hjb3J/wOUGhSsMXScrKaHtYI4rrzJTtau503w/h4MYkiibK8gVNkRB1e/xfC35cldJo2BqeZltEMkeQ3dt4LWih8hw32CJtxeJ4Gnlx4JZJonMLN4c2y2r70L6+1Lu4fAvnTRZEspDxE4Oe6ixrqoNYAOnoRz7LrHY84aMXIh2gfHC6E+WxzQKIDr+FwA9wVY4+qSYeXjuxoDgMPwl7bd34cfz7H5Jthd1x0H2VY+kYcmRmsyoncls8wLSAObA6da68rcw/AUkkF4mW9j3EOaTECLFnaHEgcgr0mbHyNQxn/esh0j3g0HyW2yRyOLrj9ei0cPTZoBFE174HUS0Md8Jr0INf7Ko5PI8DyGC5opS+NpIeWsfTj8N+jmgE8e1LXjxho2nY2PGfNyC47942Ob3bwL5q+BxS7WeSSLfEBLEXsc9kjiKlNj6HjoVh1uNjs9kmTEwxeW7e4iyASRx7jgfIoPOs/TYMyaWTHbFjGQARlwsvIdZsj1A6H0WWLwwGl/3wN8jFcZoiw/DddT+QNe6ts9s2LozoWHd5LhccgrcKId+QF+hW7p+zLx8vPma10YgZJGx1V1Ja3njqBx6ABJV0ji+GNHwGwN1FmKZzHuG/45SB16mmjcSPe/ZbUsTJCI6j2ubYiZMWuI6DaPhbfysriszJzNR82THc+Xe5u4NHxPc0Fo59CQ4//pb+n6XqMmE85WPI5r3cxRODDu6k+livU8dU3V9Y3cvBc/Hc3FizWSiyWtcwucB2PBJ+XuuHztJfPKZfJFRW57nRjfHXQ0QCPmuzmwp4Y7y3TlsQtxla5zXf/cDV/JaTWHLmaGZ+O6dlmINc6N59txbw70FkHomzX+PHNU0wNynuDSI5JCI5Q3bz1pwJ/UFUkkD4zzRHqDYXu2d4QxNS0uZuQ44rZGbi8wfC19g9e3fjt8XZeXa94fn0jIeZWyyMcCTLGwFhcODzfHTn5osrlElnkiAc8g0wCwT39AFgUZBJNIoBCE0AhCEKSRUkkISEIQKkUmhAklJKkVAqJCyFQKisqKTQqgpCaEQI7IQgAgoTQCVJoQJNCEAmElnx4DPM1gIFnknsiLfRNFfnwy5cgeMXHNP2jl5/pb/c9h8wvRPDXh7Jzp3TxY7WYMQ2ueGg7TfRoP4R6miT6qHh/RHSPxPNhl+4wNBx4t2wTE9XOI5A713XXZOqShkeNFbXNHMcTNrYwB+CNo5J/wC6uB7pbpPrfe+RkG3CMccYIDZHR7CSOLB6nvz+6ssLEjmhrLz5WSnjmWmuHuHVf0aufxsXWJX+fHg5ULJRW7y3eYBXYvPB/QLDkMycF7neZqEbQ4WcgsB+br6j8/qsd1ZI9Adi45xHhuVh+ZH+FrJd+yulj1+XPzWjLHHiiOf7tsieaLWFvlgn58C/Q0CfQrjYcncWyjJhxHDh0zb2uPYSAUPXqL5WWXW5GPcJY2NdsNtDi+KRnfb68WaPp2Ta+r0fSs3ExpA0PDY5B8LnA1Xpz0I/srrOwRl43lxyRte4B0MgJB3X2I9TXHSx7rxvH177lN5Eha6GVpO1ztwBb/ST1B459FfaR4pLMQHeZ8be0ta93Z/w9+hDr79grKlxdHktllxGSwtuJwJ8qHkc8OG09iQePWuAt3WGQu0je5hdM3H3Ext6B4Auj6OAP0WlLqUcmE7UD8DW7xNXQmx8VdiSOff5rFPqRyNMl3vBqHbtrkW6xyPYgfMq7Y6VXiTEE8mFMyBrhIAXFg5Li74q9/8AJW/g6JC7S4dMdkMAxmb8iUGgPhIHz69B6rmtc1TIf4b01ge+Pe3yH7eHNL5A0G+1Xf1T03OJjLMXY7zZjPI97y1gYw7Y28diaIHcNU32y10vdRxsXFkgwNHgsNYGRmuh7uDaNAc8nufmtKXQcd23IydSfDCPh/8ATtt5b3txPHPHAPVWMFvc8RxSSudQcN2x0vtY6cC9o6A9yVfv2xYULJYWxSiMO8iGT/pC+G2AK9eO/wA7WTBzMWFiuFxaTqmc1nwh8sBcy/ZxIs9ro9/ksGfp8e+LJ+64+N1Ia8M6Dgg9x+S6GXXsPSrdDhZ+Q5zb3uiJ57fE8kV8gq/UfEGoajCY8TD+7vN/GzY5za6g767fkptdKXF1EwYskeUyCXHkFOZIQQR2II4NcenBKo9X+7S43nthEGLI/a4bOGGv5SD1Bri/3WTUNO1hkhf94mayqLBspx96Pp7ql+86pj5Esc7P4craBER2k2KD64sEf/pO11HDa74cnM8j2CKRrejg0N3A9BY7rjsrCkgJJje1o632/wAL17Ngecx0kmPJAJeY3SMFMN8h3Y8nt1BVTrWFPHAMvFa6J7KMscTQ4URzbehHuOyv0+PLELotQxcbMgEsEXk5B5AZ+F/qK7HuD36cUuecKcRzx6hRlskIQgEIQgEimkUISEIQCEIpAITRSCJUCshUClVlQhARBXCE0IEhPukgE0k0AhCaAR3QhAUur8B6GNf8W4WC8gRSyASm6O2xYHuen1XK16Lv/stnGH4kycx1NGNBuDndASQL/K0S/Ht02DjYM8g8pr8nzdzpHtpkTQaY3ngUBf8AboqHUNWxNPY58WNLI17txG7Yz3PIt3Pr+it5ck5L4pMhpeS4+TD6mrdK7tfYew7c3y3ivV4tIic7FLfvzm2Z5DudGPYdB7AfMnoscquGLVm1rNlY9+HiiIHm8qR+75W54BHsFVN8W6pjv3NzcKQ0QYjNxR6ggkgLgsrUsjNd507pLJ/6175Ofc/7LNhQZU0zHOz8p5/pcC6h7k2Ate2+Yu8l8R/eYS+SCKKd7DbomhzHi+QR3r0v0pUkupU6J8Ef8CN4uIOJDeOrb5+i2MXw7kZUJHlxTNA3Nka10ZHy7j58q3w/CEmTIG09pr4r4u//APXPyKxvJGc4aoczJeY4HMcXtjnkAdVEAmqP519VZ4U8rtOy4mkmQPi2tq/xE3+66ufwLI3T3Dyi8FwcZGN9aBJ9CFZ6L4JkEDJjHuD3AEUeoI6D8/zT8hOKo4epOn8KPgALXTS7T321HZI9rP6LK2VzPD8c7Gl4YDZdXPxbh/b8l0eJ4WGn4L4nM3gMc4mzw4tI/wBkO0Jk+nHDc3+G5tkEDqK6fUFT8q/griWR5E2I5kvTh20gEBxN/wBj+i1WFuIxrHea1rgGhooiwK/58vdddNpMmFDI7HYWTStuibDeAB9Vz2VgTZXlskj/AIsIOxjyA6vQ82PkOvKs5Lawy4tRfeH9SGnPjEUTo5XtpzngHazrTK6EnuSe/K6yKMZUhnzILBBc7dOfwk/0Forv/wAteQMx9Vx8sS5+Q9pceD0BaPUWNo+fYLsDrMMmnDH1THZJFN8T8jEc9negO5AHr0P77pXPcXWSRRmpGtnYxwNMebjaRyCDtNfoiTTi5+yObZJVuiFEOB7g0P8Andcpj6llYWSDgZk5jogQ5Lw4OHoT29b/AHXUYGsY2pQO+6sp0TtkkD3V5Tq5230tXbGxyGv6lm4Ubm/dDIwCg/zgBQ4onaa47c9FxT8vUMh3n4GNkM8w9Yw4kEHsWgDkfVdz4tecHKfNBO+FlF7mMjDxI3v1NtI56GlweoZ5yMWObSw58xdfmZBqRvXl3HIvix6Xz0SrG2yXUJJ5pJsNrI2vLt0zo3b77kCnA/nwp/dMbIP3UPfHJ5e1kRomPaehI6gWC01wudmGp4+L95z4z93eS2fY2/LI22eP/Mfqt2ZxnkZJ5b4p8eYm4jYJHb2BHp+XCRNOXyNJmxNZdFKBuks1Q4cPiBrpRAK4eY+YBJ3JLSfX0P5L2DWJv9R0t00djNxm8Pd1cKo8j24XkOSW7gIxTD8VehPZZEa6E0lFCEIRSQU0IIp0hNAk0IQCEIQRKgVMqBSrGVAQhENCEIBCEIBCEIBNCEDQhJBNlAkkWew916N9nuH55a1/DHT+dI7bYDWNNX7WvOoWuMzAz8V8WvZPBzji6FHO/h2UxjGsPFMa8H9RZPzRHdYr2RzZkjCDK0GNsjxy4jq75AC69APVeWeL53ZmoZB5eXO2i+zQaP5kE/l7L0bTHukgf5nxSOyYYiGn+V3LufQ7SuOy9L8yZkkob5cuUI3v/pG5zb+tG1rybMOnF/6e+SeHHDN03V3HFnp+lL2Twh4BaGQnJY11De5xHV3qf2+QVT4F0M6prT8qVgLifoDV/twvfsXEhwcYBgBcAKA6crh5uXvUer4/DNbrRwPDMEMbWMYyhRLiOforweHMQ7bY0gH4SG0R9Vs4jmgFziCet9Fbwlry08cdwtOOW2/LFz7vDsbsR8LGOaxwIYASfr8/7Fb+Jo0cEbBsrYznni+P8LoI/i6AAj05U5dzS0RjkcOJ4HVb5XPeqoM3Q2yskMYDQW1wqUaRM2QRlu4xknniwew/wu/jja9hFCvcLE/HiL7aBbeVbE3t59qGg1MfLZTAASK6f5/2XPanoILN/lB8rDYtval65LCwuLuNxH/AtCXCikj/AIgF0sfbVZess7eHyMZFkNhdAwyFxEZAJs9dvJu/Ynn3VgcaJzA7YyNpBP8ABaYzfy3C+vQroPEOht8/zYmbmirA71z+fHHyXK5WbJE98LGiSS7MUgtk49K/lfXQjqRS3cfNvqufm8bXeKny4Puxc8RNiYyy50Q5Hcdf5b7H16qkydUycKTzHta8R8OlA5Mfbd34vvfz5V5kujkgMTC7a4bmRvf/ABIb6CzztPNX7hc2GS48flPBbj7zExx5+7ONVf8A2E9u3PVbpnty5celjrGZDn6W2Zu2TJjb5jHAcuFF20/QH589yb5uLCaxkWfitlONK6n472WY210BFO29wf25W7jjyMWOaKUxssRUXWI3gO4BHVoNn0p30RiY0s2WydjpWujbUrKcYZB7kXt+XT3HK2barNLHV9S0/E8MxUbbnSBjZXNElAU4l3z2gE88CwqfGbBp7smfKk/9FOzaZGMpzDx8QNmxxfuBR5pLW4IIsFmRLKTA2YyGNr27iKHpYBPPTspwQtwcqTDyoZBgPFPZIQQG2PiFj+UkH3Bd6omlHqLZsLNka5wMcY2PdEdzP/IerD1HzXlufE6LMlDmbSXEmunXsvTsl7WZOVHA5jS2VzA1xLraOAD6CgPY/txXiDGhZlRtdugNH8TSQe4/eunZZsXNIWQw24iN7Hn0Bon81jUUIQhFCEIRAhCEAhCEAkmhFRUSplQKLGRCEIhoSQgaEIQCYSTCBoQhAIQhBt4GO7KyGxM4Mj2x36WeT+QXsUkrmxR40eM1rGscI9otxpo+EfufdeTaPH5mXjgPcx3ninNbZBrih3XpOgQS5WbE8lz8t0l7nDiNu6y8/wDd29LASp/Vo7Vn6fhvjBI3z2HNNW0NeG36ckLocKXB1zEyYJRT5A6pG8Abjub/APkHce61Nf0SJ8EIhYxwkJ2uc2zuo/CP1v3XD4OTl4OssxpJBbH3tHAo0RQ+hWnK6b8MdvY/s6ZGyB0hote4u5FUSvTfNIJBF37Lzv7P4HDSw5zW9Ty0e9j913/lOfbzbnM5APQLyOS7yr3sJrGLGB5LKAa4EK7wiTQcGgegXOQyO2AbR6n3VxBkUWjoWj91lgxznTomC/i6E9a4TLAdwsgX6LRgnocub0456KbcxotjXAkFdErluNb8TCHEbjt9UpWii4Cu1hVzs4sB224nutZ+rEcRvj3e/NK+0JhltuyzdhZHWlpTOjA3VZ6WStZ2Y3yrL+f666qvmzWBwYXON9AB1WrLJvxwPKEc8RY8fi6exXn+uaW3cSG25vIpt/Ij0N8rtJ5ZCQ8sdwQQOOFS5/8AHk/g7XPbxQPRa9tsx286yoWyyOdON0rAS2XoSO4J9O6rJMesxzGSkQzDyuQKJ7j53zx7dF3Op6dsLoxTDwQ4H8J9PkVyU1x6kIsYfE7o0m2g1xQ9P2W/j5HNy+PLOnOth+7575/PjjijLrY5w2ub1sV3v9SVpam/JeCcTKMTpSXBsBJe0EWb55Hyu1eaxpzcuUzCWCNzbfte0kk8g1XQ9lyer5L4nwzafKJDjRiDIcAQwuNlxH50D7H1C7OPL2eZy4etUket5DJdkj5Y/LaYyXAEjiw75H/K6LEzxqkMrsl9S+SfMO7gja3c4expc1mY0OdiOlx2viy4TufG7oR3Iv8AUX/laD88Y+mOx4Qd8rmtLgfws5J4/wDb+S2tLpmwxZ2RJ5Nid7GOhr8RIaLaf/aa9ee9Xz2s4seZC6RxL5YG8xiw8DryCOiu8FzcjBdkMdT4Iw4OZYJaCP26/VWeuwQ6rgx5GHxqIBBLWHc4jqeBzY5sd1nGu9PIXthiIcwvc/ggObQC1upJPUrZysaSKVwdZNkEnjkHla3QooRSaEUJJoRC7IQikAhCEAhCEUiouU1AosZEJpIgpCEIBCEIBNATQCEJoBJNCDa0+d0ObCW8VI11g0RXf8rXtvhSNuPG3IcS9s7hK5hF7mt/C33tx6ey8TwZI45nOmdtbtqg2yfYdvqvfdPhGHNiU1wZCxpI4obQTtA/Kyr/ABhle3XvwDkRvOQ1rixuxrGsHDiLd9AfzI9gvOJ9Dlk8RMGLAZJ5HkNJ/ksdSe47/ovYGtiliaTfEPmSl/NEi+nckqPh/DggyHTbbf1+Lkgrz/JzuNer4fHM5urrw3pEek6TFjj8LGgOd3J7/qrMudDLKWhzhf8AKFkxwBTWmweaWdzQathBdwF5+9vT+NcRvLNwNNBrgEn9Ftx4744muyJ2sbdfCO/ta2oI2RRf9vzWyBCGsYSw24Vza2Y4sbkzxYMJbZklNCvx0P2WYafj9NsgI7tkNojkFBrnc3VdFkEtF34gOw2rdJGi3JhfgYjuXGctI6b1JjIcVu3GhY2upDQCVjdkN2tjO8u9mHlTssA3hwA6kgp0WX+tPLe5rXAvdY7X/wApU0jpQQZCN9VYKuZ4m5DwAW/E7kLVyNPc/c7ebHQbQsL224WT6ppZtvWnE9L9f7qENtbwxpt1UR0WeXGJFCRm4Hu0ivZNkT2NqYdb4aevPVa27pXZ+OC8UG07qTyuRy9KAzXSCNu7dfA5HoV22UQ7bxRPqqnNYBC94HPqD1UlP524TUBJJhywgFr+QaFnk80fqqDH0qLD1B2M6EOEzf4Q9SOC35E0upz31LujFu2kdOG+h+iWdEJc7DyIra1jCLb6DZR/Rdvj3t5nmTp5fqeLHjZDJcZropHm2jmg4AXwfUHkdx8lxeThuZmOEDJIjC4gNAB9uf1XoTnF2TladMP/AFTMguxnE8bmk1+livQKmy8aGPAkO0ta97QP+0H8QPyN8+4XoTt5e9F4dyGxwhk0TIqBJDem08Hj+3+FXa1kNe6dse5pZuIJPrYA+tKwgxfu2LOZHFkoYWgnnoOq5HWdUaIhix2XcGQjjtw1Vj/VG9/mY73AfECN4PN+jvn2WqmXFxJPJKSimhCEAhCSARaEIBCEIBNJNAlAqZUCixlSQhAIQhAIQhAJpIQSQhFoGhCEDC9x8L65/q3hjFfM5pyov4btwPxFoF/UgBeHDqvS/Amq52UybFeWOjtpY3aBQHXbQ69PmrGGc6e0Y2tMZp072tuSYtYyh0ZZsq90iRjZS4OBuhfrwuMkxpI/I8sVC8HZx0bf+xC6bTpHbAQ6y1vTtYC8zy//AKex4F/R22G1xe7v/T7q9hxC5osc+65qHUcXS9K+9ajkRxuaN3xOoH5eqWP4+0x0hZ5reOS6/wCy58ON1Z8jtIsaNjRbGfQLKwNYeA0EdqXJ6F4503V5smJkzRLBKWFrjRDb+E+wIXQNyopOWSNc3qaNkLdMdNXttaMluQBpBPa1DIO1lbjR9e6rjnRscBbTXVY8vUG7D5Yuh1uk30ymN2uGuJNF35lSYdzdxINrQGSJWAtP5LC7JdC0iyHHn1r5BXZ6tx8gdKS4WGgtFrA8jyxbhyen0WnkZQZEHPkDRVg3XZB1KGOFrnS23+s0Apo3pgfhmaYuLTsvd8JWN8LowdzQll+I8GCN1zt4HNOtc7P45012c3Hkfw4hu/oLPRa7gznL/K2tQk22OR05VHnThuO8EuJII4KvMl0U8ImjdbHNvcR29PmuRygZ5KjdTPbnhavXTdMpY5jOeRkOcbEY/CCOvZWk2QwYpbG3c37oBzRIddu/RvT5LSzYr3CRw4dwAPTotPHjOJPijLlJE7gPLZ/I0Dlx/wDcR9Cuvx724PMm8duT8QAxZzchxLTYElnhu63An8gqh7HPiAER2NDw5w6PJodPnSutac3UmZ8m1/kTyOc0tNDbXwn0rkAe60sAf/LfKcXsEj2/F2LbaSfbm16WLyMoxZuG2PR8eZnDDHuI9SB1r9F5Hly+dlyydNzia9F6/qmRFN4Ne0gsnaXRuF9g6919+q8gnhEbjzfNG1amLAmikKKEIQgSEUhAIRSKQCEJoEE0JoIlRKmVEosSQhCATpAQgSE0kAhCEDQhNABCAn3QbmmablavqePgafEZsrJeGRsb3JXsmhfZ3rnhCSbJ1mGBrGw72Oil3biK+EmuByvOfs/1xnh3xzp+oSY5yGtLmeWHUfiFWCvr3/VMDxV4VcMWRj2vFCxy1w6tI7Fc/LzXjzk/jq4vGx5eO3+qCSOKdm0MYY42+Wx56/hBFe1WqjUs5mi42TkPFthaH9eHdlDFm8nUoYntO94O0n4eRwRXyVD4zzmNl8iYXE4fDuHFjqK7lc/kd8jp8T9eKuQ1H7Q8rPyR94ma2DkAbbd+nTjuq6DWTHc0OUMQN3APdTjR6gA2QKWA4mFC587w5rAbPAI/M8qoztdhlcRh40cMDSR5jxe75DussdfxjlLfrdzPEz8bLxp8J8jdgoyA7HkHqKH50TSuNH+1HVNOdGGalJQNG+//AD3XGZEue6TGifGIxkH4XTBsbaurN9AqrLhnx9UlxXtgkexwFwSNkbz05C23G2dxrmUl6r6j8LfaazUsdsepSCSQk/GwcD0td2crz8c+TThVij1HVfHWk6nkabkDdERRo/49vqvpb7NdRGs6eJ3zF8XAAAqq7FcnJNPQ4c3pTJnxtjcB+OuD6/JcxrPiwYmUPMraXbG04Ht+i7LMjI09u1oLQOb6/svnL7StROLqT7O0kchponni/rysZLbpnbLNoeKftT1OI5UcEsLbcWChextAAgep5/RcPkfaLq+SATlu4aG+WSenb29Fz2W6LIuXKcbefhY0W5x+SrWMa1s0sWHM+OHl5c6g3nourGT/ABw57/tdg3xRnZzQyR03mA8uElc+iJM+eZoE8UjZRZbIzrY/RaOneLGaJDDLleHh5cwqOR/N+pHqrj/450nVHRDJw/u9cggV7cKXc/jGSX5kvdI+1HUtPgEcoe+NopzXDqen09V2Oj+LcfWseSSCo5o6L2NFN56V6BecTw6dlRtnxminfzcFYdOnGJmOOK4tJ4rr+y1ZY42bjfx55Y3Veu48YzM47m/AOSR6nsVqa0xuKzzcdgEgthN00A8Ek/K/klo+W+WMPPwvAFs7LJruM7J097ZSDjkchp5PFla+O6ybuae2Fc35TcrU4YItoiIhLtwLWsAa0kc1dcfn37aGViSQQQ4eY8sdjvlbsANim1+qzSB+ZrLXRObD5DInFnFN2t23z1N9/ZVOp5+bqmoRYeM2pn7mebR/CTz+XT5Ben7TGbrxceO55esamnaDqnjV02LpDHiBhp2RJw1n+T7BbGv/AGH6hp+kS5OLqbMvJgZuMDoSzf3IabPK9k0R+n+DvCUENtDWN2ta38Ur15vqHjnxFqPieLFdNFjYhfXlMZf5k8lcV8jkt3j8eph4fFrV+vn8tINHqilv6xH5Wu57B0bkPH/5FaK75dvIs1SpFJoVRGk6TRSBUik0IFSKTQgSE0iikVAqZUChE+6EJhAIQmgEqQhAIQjsgOU0k0AmkE0GSKQxSskb+Jjg4fRfSHh3Jm03UYM7Df8A+h1OBkr474LjQv2IJXzYOq99+yjWINZ8NxaTMR9+01x2bv5ojyPyPC5fKxvrMv8AHZ4eesrjf66TDkY3xTs2s86F0jXFrKJ3Osknv2Ir1WLxHoTtQ1FxDGtIAdTejvelcZWmjC8SYoeTflOcDd7ieT+Vj6KxDfNzI3EkGOx637FcvPlfZ1+JjLhp5Xq/hQuxw3y3O9QBwfdcvjeGYoNdh+/mQRA20/0kdqX0z/pTMrDeC1pLuljouV1bwe6Vt+WN4Ni1rw5rHVlw4ZOR1jwVieIcCGXAzcE5EDSNkkoaJGHmuehH91SYX2YQ6Qb1DM0xrGvD3QY0hlea5A4HC6mXQsiBoB09sv7eiyjD1XKYGOhEETOBbug9gt/57WmeFhvbkp/BrtT1iWSCGMktBDfN2E+/Q3x2XpX2U6U/RszU8KVm1hex+3+kkfFX5Lb0DQTCPOLXF/d5FG/RdLpcLcPWvhAL5OXu9SteeVsbpxyXUdlqEbHYG0tcOLNe3yXzJ9p+nPzfE0Ecf4HEgk+q+nNUZ/6HeC6tnABXjGsafHqWbNHKOSeHDnnsfmsJdZLMfbB5Pj+A5JH+YYsj7vtrzIw3cT36ngfJdnheCMOfwfkaZIG42U5vmR+YRwQQRfejx+a6VuiTz4rAwuErB1aaB91Bj8tkZjycRmUy+Nzb/Xqt2PLY1Z+Pjnjp41kfZTrkGr75NMyLa74SZG+U096N9Fs674ShxdGx8PfDLNGDvdF8VOvkX26r0/OwvvDy9ujytO0AbS4D60fZLA8MZGc4ukxhFGSARW0lZXyLpqx8PGXdeN6T4c1DFaHxFz2H8TQLB+i67F8Jvy2tkMcrQTztBXren+Go8dgEkJDh/KOitHYsONHtjAAdwufLmtvTpnBjHnuhYGRgSeVuebd/OSSf8LoMljHRvEw3sANj/C3J27Jj8LQHdTfVV+oyvjZIYnDdW0uabr5KS9plOnm2oX98z5XRxtxz5hOwWGkdR69eOPZWXhfF897JpHkjaCXEj5rZl0Nv+hyOMjHTtkMrI3nYCyj370bPPHwhclrOpZHh/TXQ4jHxTZZ2xEj8LT1P07fRdnJd4zTg8fHWddrj4k2v+JpcmRz/ALtjHyoR22j+b6lY8Xw7Hm+LiJBbYpOqtPBepmXSIRl7d7WBu5b+q5EPh+LWdW2W1mIZGAmuel/nS5d29PRx1O6+XNbk87xBqMgqnZMhFf8AkVXqT3F73Od+Jxs/NRXryaj523dCEihA0IQiBCEIBCEIBJNCCJUSpFQKLE00k0DSQhA0dkkIC0IQiGhJNFATQEIGF6z9g2P97+0KeFrg1zsJ9Gr6OavJgvQ/sc1qHQ/tS0uXIfsjyN2O5zqobhxf1AWvlm8K28N1ySveM/CysXxjum3uiaC1rZP5HDuK6gj1/st0NDZmuYPorfxJsmzhk7j5pBZxXw97Pv1HPSvdaGGRNEw8gWBz+q83nmq9TxbuX/t0Gm5FsHm0ABQV1FCyZtt2gO+I8dVzmKzYXRsFrpcIbg1rQbPW1zz66rrRN0eKQkuIFnixyFOLw1C+Xe8NPaiOCFcQRje0jsTuBH91kLgxzWg7utErfMdNVyv8c9qkMeDG2LHja1ovtVlVOEwDUo39XE8/4Vj4ne6ODzQCdgvqqrSS7IbG8EtJFivVStuE6drqfOjNLh1HT9l45mhzMl8jQfiN9KXs+pc+H4wSb7ryjXWkseY2gvBIH09Fcp2cV/VbeHiHloc3lvRdXJ4ax8ssmjJYTyR6rg/B+Q/JnO8bD0IPqvWsNpbBsP8AL3TGMeXc7lc8PD0UbCwkOHSiOD80zhugaSHsJH8paugmewShshbR5+oVbmDc220LPAPdMsYwxt/qhyZhFfmBosdugVBm5Qc0irJBArsrfUmESta6iD15VJkRECwAX9Pl81pn1v60pny05ge6yB0rkeq1ct4hilLGF7uapZZ2SMms3V8n+wWtkTuMJjby+txHt1oLPFrzUOXg5GoaRJi40lRllhxIsscbAJ6loN/JYdT0mLVPDUTHt+Jrm7d3VpHBW/oOc3GxNRsyteeaLaEbGncSeOh4H0WPCzWPmw8NnmT5M0hcGVyWjqT8z3XXyT9ZXBwX/wBliw8NeE8iGSLzHHyxRo8Ks+3mf/T/AAozGhIAyAyN1em6z+y9Dxck4cj3ajI2Jp/7v0Xi/wBtWpO1TQsfMcC2HIzAzHvjcxjTbvqStXD3yx1+Tb+G14QeqSZSXqPBCEdU0AnSKQgEkykgEIQgEk0igRUCpFQcixlQhCAQUWkgEIQgE0kIGmkmgaEBCBq68NysPiDAjnjhezzm0+Vxb5fN3YPQda7qkWWF/lyseLBaQRRrkIPsfWdQgxtPxYcckuLTsOyg9ryfyDQOnuFm0re7GYXN6CyOi4nxLrDm+DNOyWB3mSBoonbxRJAPoDt+ZXUaDmOfhQvIIc5oO0dbXn+Tj8r0vCy+x10DG+aDR9FfYsgG1vAPqucjlbwWOoA/ivoraCXb5dAud0v0XLPr0PrpYX7nBvYjmkZDTtLmkDjhaTJaZRcW+lJzSlwLmggDoD0WzfTDXaj1rLY2ONk7g1hdzY/Raeh5+Nk5nlxvjHxdPZVH2i6Xk5PhWebAm2Tx/EG1+Me3ovCfCmt65pWtNl1Kd8mIH15r27TEewPqD0VmNsbNyTb6/wBcmD8CNsbgAByR0XlPiHKxoJo2SShocaPxcqjz/tDyMzDdFgSsbIB8TnnovHPE0uva1kOGHmyNe15YSDRf60eyymNyu61zKceOp291xNaw8bMjyMSZpkZ/1A3o4fL1Xruj6rBqOIHsNO28/uvjTw7i6pp5ZBO+WeVxHxEk1fqV9GaJkT6JBDI8u8mRo5bfwlY3eNbbjM8f+XpWTHGXAvouad3RaE793DvwgcUtPG1IZzf4XQ8k905304NLxTullS9tfrceqqs0bhYokHi1Q5TvMJLHA8f8pW+e8O30SRVEKkhl3zhrw0BreQT3/wALUzaGa0hh3mttjr0XJ5TXZOW3Y5xYP+q0DdbAeRXv/uuq12R0eNLWyQmmiMuA4I5/M91wkWfWuwTYsbY8wNcY3TtrbxW5vYm+K79vRbeLHdcvPnrFYa2+bSsWN8krBknEb5202HbiLBcBZNtArnra2/ArMSbLx8uaNombAGhodezk3RvpzYquoVbq+D5Hh+LJ1h0s0ObPTmQiiLHxbfWgwOHsQp+FNLkxNanAeHsjcWt3EcuBJsexDif0XVzf/Dk8b/8ATTsczSWapqD8nOLziRv4jJ/F7leEfbdr8eo+KMbS8Xa3H0yOi1vQPd2+gAXvniLW8Tw94V1DMy3DbFGTXqew/Ol8a6hmy6jqWRmZJubIkMjj7krDxcN5XJt83k1hMGojsmhd7ywnSSaAQhBQCSChAISSQNJCRQBUCpFQKLGZCSEAhCEAmhJECE0IoQjshENO0kIpre0vEdmZ0bA5rGAgvkcLDB6kWOFoLYxsufEeX4sr4pCK3sNGkHuuXmsm8J6bLA1zsfG/hOO8Pc9oIJoAnqT2PAC6HwXmzOw/4znF7WglxFNvrQvk9f8Alrz/AOzrxHLmRZWDqWpOJkjcIYHkkDsenTrfFq8ZmP0rXHbpZ4IWAti3Au3i+BZ4vr8uPRc/kYe0b/Gz9cu3s2M+vLLwHAur4f3Kv8aZoHNbbXBYWol2FFLG6oiQ0ANrnvyevNro8ebpHG7k8kLztaexMpXQHNeHkBvXoauvotyFrmRmSYbiOR07rnc3MZpGAcudps/hcaNmroC7KqHeKHS6HJOcl0DHA7ZnGxEObPpfUD3PyWzDC5MeTmxwjrtRfFkYMjJ3tDGf9Q9do+Xqvnv7R5YcTJxsaBux0kYlEPBI3Hq73A4+d/NekarrPmaZHh4bhFD93GwA04yB1FvqTZaL+Xpx5h4oysaSGLKyWCbLbAG7YaDpHgEtDe5HG3jp9V048WnDyeTcup8ee6gJIsgRRzSxZFNLtjut9PryrfRXZMkLfL8wtG12++SS6rJP1PyBVBntycTUPNnY4ymQyuPNCndPz4Vv4cznQeePNcxvDnMHIfzYA9/b5rP1YfkunsWhY+PkiEvc3c8247e1A9e3WvnXZeoQ+UzCbjZb2yQvHwvNW3np9LH5rwDStdlx45ochx2txGulLQCD8Y/D7kPNdOW9l6TH4ldFp7RlRtycd7Y/wP8Aia4j4jY9Tu49lqz4v8dPH5Vs/Z1bZpNHyTDM7fHJ/wBN3r/urM5rJ49xLXWOG9Vzsuq4uoaAPvDv4IkMUoLxvY4DjkDjgD59lTYmZk6fmMxZz5kD2uMUws76PIPv056ELRlhcHVhy48vc+unzZBLGAAbPA6qjx8lmLLRNueSKBHAvqsUubJmTnbC8sqi6yAfZVOsTw4GnyP88g44LmE26iPT8vyJWHrumeXrO2z4ozBDiPoN82i2N5q99cV3Hr9FwuBWWcZshDcycmSPeTdAkBtjoXURz6A8WtjUNXn1LT35Lw1/wlrXteDQDgASPkevalSTxEPY188WOYo2MDHtOx7HDsRxbTZv0K6uLDUefzcntXVZHiCTL03JxZ4o3nCZcYDafe7aODz0Ngjng31VVpvjbD0iec6rJGyV1P2l97B1AH5lQi07ZmZOXHLIzGyJAYmvAaauj1PIIvsvF/HOrRy66/7tGwNa9zSSSXGj1tbssfeTGtPHn+O3KOk+0L7QJPFc4xcQuZp8Tt3PHmOHQ/ILz88rDjOmkjL5Pw9jSzrdhjMZqNPJnlnl7ZFSKTSWTWEIStAIQkgaSCkgEISQCEIQIqJU1EoyTQkmiGEICEAhNCIXZNCEUJJpIBNJCBoCSaIsNHzH4OrY+RG/a5hsE9OnF/Wl7FqeQ3VNN0jIaYJDOxoEm7c0S0C81162HV8/deHA8r0rwZ4hEsLtMLscZeUWsjOQ7aHOLvwt2toCugtSzcWXV263DzZ8vUYBgmcRfE0PnJDQGH8Q7XXp6r1LE1KXD0/FlgjovrzpZmE7Q7n1/F0/MLzrToW6DkQyuwp555C7ymEtplH4rBHqAOelL0DR8jIn2ZeYRJI9xOyR24C+RQ7n/ZcPJhp6HByb1FJ4y1WTFbHlOET84PBxYpAHiNnBc4jsf3rvVLlH+NMKDIwYdYzHwCN0kssksW74yfgGzptA5A9/yvfFUkv+sZGTHJsyZRt3bQ57BfLWk8biAeAOBzfpTaF9mUOszu1LPZ8L2742A2Wnv+tqzOYw/FeTK7c7m+OI5s7G+5ZrH47GWDM8bg4Cmk+/Un13Km1SSDVcrGjxtQrGx9zoieXCyTZrvZJ+q9dxPAmi/emMyMSN1u2tJaOV0uN4U8O4uO5jsPGka09HQsfx86tY/n26uPxMJ9eYaB4Q0HJ0GU5WpxGdx3vMj9u1vsPUlcZq+ijSMzIdpWdj5AseW0nihyPa7K+gc/wf4Fyo/MONiROB5awObf5ELTb4N8FSeY2HDwHgju0kj9VjOTV3t0XxePLF8/ty524b8Z0oIn2uklMg+FwoEk+43WObJ6dFv6j43yIosWHHMceNhuc1rQ4W5m0ABw7uBG4EdNy9c1D7PvD0pcYcaCNp/D5cQCoXeA9KDXNx8eOyQCSORf0Wf545cvDxnyuU0/xs7UM9hhzThsfBGw820PAvc5vHuL9xwF3/AIa8Qy5Ok4MEj2DIxpNz4o3btsZA20fSieD6LltQ+zSTFy2zadHulkcRtAoEVzZVv4ewTpue6SYCZrwH5D2OHwuB2jjqRZH/AALK5zPHTnxwvDnK7zUS3HyAIiXCRpcHsoVxd+/AJXnet5rMtszcuRpjbuG5vLpLbwOP78dF22uz4YxXNm+CaO3Cnn4H9uO/PFehsLz6STH1DSMucQMnzY3tiMYvbyBQJ79CP/0tXFj/AFu8jPd1EdLiZ/8ADn3fIygyIucXSBnw7XVsPF3fB2kVR7HlaONh5EsVZGRX3clkbXnb94B4bHXYEg/mAfVbEzY8fGnjyjLI2aH+MzbQAa3h1DoenuAt7BkjEcZbHvw8ZvmMdOyns9Aeetc/X1XXJ1t59tt1GfTMYSTTStx444seGg5jOZH0TQ/4ei8O1bTP/mcuRkscxjy4sjkPJJ/sP3Xb+LPHrzFJpOlx+S0jbK5h52/0g8UDxdLgt8k8m55snj5LPCb7TK66NkdxEAAD0WnI0seWnsreCOgQ61rahj1/Eb0HBW1pquQkhQMlJCEAkhJAIQhAJJoQJFJoQIpFMpFFhoRSaATtJCIkhJCBoQhAIQhAkJpIBNJNALPizjGy4pjGJBG4O2E8O9lgTBRXreP4smycWKWTJihzcdgEgY0lg28jcW2bvnkHuCuz0PWpyBqGVKHufDuhjGO1riefjcetd+nN2vBNKzRiZIk3mOXcCJCSWkdw4Dmvfn5Ht6dojonas2XBlc9hoMha/wAznuOB+Fa+THcZ8eXrXrGg6M+fUnZeaCTtDmwA0xgLT3PU1yb9V1WRvxogzGaC0my6OPgE8AX3WHwvi4rYYy7ysiVzd8ssTC2Nzvwhosm+eKsepXYZceyN5yxbtm50bW2bNV7Dpf8AjhcefH07uHn/AGeS6/NlQYJycdpaYfik3D4iLo0Pe+L60uZ0jVcjJ8nz5pZYQ479vAaW/Eex569qHqvT9W0P/UMZ3lMcwBm0Ok5BJ5of5VHp/hfFGnlufsijY4gxtYG/FQs3RugOvKw4tXpv57lj+0Y9Nih1eHJyWYccMWKGsDt3meY9wFkf1ED6fmq8abiYcjjHUUzTKWBz74Y0Eu9wHUPmSuibFiQiCUvibjYZL2MEwd5lfzuHXiieep59ly2XKMhzpsePfOINkbXNILmFwJlPyDT874XRlhjI5MOXO3UqmxfEGZqme1m7ynOZRA+EfC+qI6Do7p6fJdPg5UbsiJjQ7zHglvFCr6/JcxheHZTkB80L4onudIGH50CPb0/NdvpvhyWdpmfG8xuaAXGg4gcAC+y5c7N9PQ4scpN5LFk3nCExBxaLa2XaNosckDvS0fFelyfdcnUIY2Brgwse0WdwNG64Ng/O120GnswDjRtjDmQiyBwDyPiA7H/daOr4X3NhxS2MwNPmNa3gt5+F9jtz09eFt4sHL5HJvWniPiLXM+COJkcXmMnp8QlbbQKPNeos0D7dVU48402B5ha8xHY95lBcZHngdK4r8j7q+8UYQj1ExzOLQ7b5jgSSXHm+eOtih6Ln8rLw9NjefL83IeNoD6pg7kN7mxYJqvRbZJLpz23KeywzM/Hy4P43mF7yXfxJHbunFkG29enpwuW1/wAVtwMSTBw2MbkTNoMicf4Q/qJN8n/dczqniNzGOjxHbpS7qXcg+tdlTY+O9znSzG5ZDbnE91vxm2m/rGR0j5hTmRi3FxLW8kn1KyxQ+3RSbFTr6rZa3gV0W1qNjQG9CEPhElsfXxCqUw3njp6LKYi5t91Ucvk478WYsePkfULXXVzYjctrmTD2Dr5C5eVhimewmyxxFqIghK0WopoStNAIQhAIQhAIST7IEolSUSixLumkhENCSEDQlaEDTSQgYKaimgaEIQCEIQCAhCKdrpfCGe3H1ZuPJJJG3JIYCyTaAT0vuQehXMqUcjo3hzCQR3CD688E67PE1kM7dohIZHG11gnoHcfMfPr3XoWmZj5AX5ToZcl8zt0d/hH8rfd20i/RfNn2f+Mop4WQ5rocaHHLGPLQ6x02vrn0Iu/pZX0F4TkkfpoyX+XI95c62todb3c9qoBYZYLjnq9uuLvMBitgb0c9zaay/QKmyo9OldFHIxuS+/6Rsi7bjZ570PYqGZMZGYkWFJT5gWuexx2x/ASSa7kA8/ktURtgY+aJ0dyU2N0g546cH3sk8fuVp9JK6Jy3/WB+j4OVOxuVi75JAHtg3/gZYovri+Rytr7jpsufBLGGuY0+UxjeNztouwe9V1/RLSpBJgyTyOkMEhcDO8V5reS4eoHvxwOy1n6ziMnkMIfHh47QXy7bEu5wAa0gdCSOnYfNS47jPDk1elxBozGsZYa6yedoG09lsvxf4TPObtDCQQT+Kj6fJZNJlf5T58gkulZzY6Ftix7E/uFqalqMbMuaMPM08UY8yJhokO4v0B4PN8LD8U+s/wDyMrdM2pN+7xB8e2TzXNZe0ObY7V9QD8uFyXiPVY8ds8rmiQtA2042418TR2PSr47Ky17Uo9Hx8eDfXxBzo2chjTwSfWyBx3XAa/kw5uDhyxZ0UJ2nYDMWse0utwvsaB6+p9luxwc2We3K69rcWbozWxRxNYHCaaWYE+Y6+tjp3FdyvIvEeqY4bJBjTTHNyDbw4X5Z9iK6319D0XYeK/EEeJpwhhHnNaA1p2lu5w6EFt135cbN1wFwWk6fNm5DsnMe54uwC6wP+eyymPZ7df8ADBhaa9wE2Qdz66n19VvGHsKtWWTtjZtYBx0WuISQC3r2W6TTVbtrCLn1WVkVdVsiOm/EFEtIoAcEqsSawNHS1n2gfh/L3TYwgAnlZBEXPaALq3H9v7oMWQG4+O95HwxtLj9OVwBl85zpP6yXfmus8U5f3bRxC0/HkO2/TqVx2PbhQV1s/wCWVCZY4dQUljrQEBCagEISQCEIQNCEIEolSKiUWJITQiEkmhFCEIQCaSAiGmkmgLTQhAIQhAIQhAk2tLjQTa0vcGtHJWd4EDKH4j1RUY8+XTZPMxpNslUeLBHoQeCPmvoL7MftD83w4zFy3uDgx75LeLkcRTg3+kANuvV3uvm2Tk2/6BZdL1SfTNTiyIJHN+IB4B4c2+Qotx2+4hqsUWJC5kE75HT2zy6qTaAAbHUVt+gKgdSZlf8A1RjY+J7XOJIeGN/mFdOa5v19V5X4d8TP+5wwCdpfFQjM0hvaTZbur0v37K9yNexotJMDc10s2Q7dsdTel7W8i6PXn0WPVTVx6XWratPBjABzXvFlkbOQ2IkNJ4FX0sdz1pWmJk4rvD5bkTGOVob5nkAvDmjkOAFckG/m6ivMtHz34zPjcXwbiyR1kbS78ZqqN8cm756KzytajjYzAhdGHiJlkho2VZBo9OoFm+eSppd16PJrjImiODKkix8faNjgAXloaR346ce5PosUWssw8KXNmcxz5Xbg1nLrcTuI9BzVmulryjUvF2NpAljbLvyPM3BjX8WABbiPQDsuM1v7UMjKhbHjmNkdguDTw2rrvzzzzfIHonTKTKx6Tq/iMzajNBHlvmjZC1jBKLbuaCTRJvdyB9F494q8YPdCcbEl8wAOYZHiy8FxdX/iLAHbhc7n+KZZ5RJjW1zSKIFc3d/MnlV2Hhz6hltLgXvcaaD2Ut0zxw7b2kafk6zmNflOuNvJFAD8vVdu8R4sQiYNoDeylpmF/p+KGNHT8RDeqw5It7iQ0d+eFswn9rXnlu6jSLTI+z3WZjeAa5tJpaao1azNIog186WbBAjc2iOB6BSYGmvVSHT4RY9FljYCbd+QREY2AO9B6FZGMuSRxqhwK69L/upkcDcRR6UpRBxjJPdzunblUee+L5zNrzYASWwRgfU8n+y1MaOmNABvtSWrP8/xPnPN/wDWLRfoOP7LajaCxoHHZbeLH+pndSQ2uI213RJA2WyG7XdDSmQea6+oQCQ7ggV3W6yXqte9fGhJE6I04cdioK0FuJbJ+E8Fa82JQ3Qnc3uPRc+fFZ3Gcy/1ppIN90LSzCfZJCAQhJAKJKZUCUWMyErQgEIQgEUmkiCkwhJA00rQgklaVoQCaSEDtNrS9wa0WT0CiBZ4V7gYP3eLz5/x9h6KjXETcLHLn8yHqtJw3DfJxfQLdy3eYS94Pl/yj1Ve1xfI6+hKjKNCbc9xHp3WIt2jhbk8PluLj0Wo63OCjJ6l4embneG8cyEOeAGO+Y9f0WHUcWdm8MO5l3ThyDXr9Sq7wLN5jM3ALiCQJGc/Qj9l1keyRnl5QDXdiO/0XLnbjlXVhJlJtwWTqOpwtEbJ5BEwkhjTxZ6kgdStM65qTJCTNQeC14aKL2nsfb09F2epaVE1peyiOy5efD4PwgEpM2V4tKKfKzMhm2eeR7LsNc6wFgEDzx0tXwwPNqmmh1JC3otNaHNNH1FdVl+RPxqPE00kguBoqzzdQ/0KAR4oAyXii7u35LpYsFmNiSTSbQI27v8AC831Gd2VnSSPfuBJr0pZcf7X2rDm/WesRm1TNneXS5EhJN/i6LYg1/UIKHnukaP5ZPiH6qrPVJbnPp2WH4vi/DlY5YT/ADxmwPp/urzB1HCyQPJyo3vJ/Du2n8ivMUK7Y+r2BrtrwLFVe4rM1wrrVD1XkePqGXi8Y+TLGPRrzSsIfFGqRcHIEjf6ZGAg/wB1dp6vTIi57gWtJHqFnjDmRtG112T091wOL42kYQMrEY5v/wDU8t/e1cQfaDgxsfvwZnfAQBvHX8ldpquRnF61mc//AM7+f/uK34hdNA691Wxzfes6Wbbt815dtHNWVbsaQAPQdF08U6a+QvisCvcJFpDaPCyhjdo+GueE+45F+i26YMFi9p5pSa4AVZ29j6puaCA6gSoFhNk9vZQSfHHOwmg13YgKvnx3wOp447EdCt5p2giubWRrhRY8W09bWGfHM/8AtZlYp0WtyfDc23RC2+i0ly5Y3G6rdLKdpIStYqCoFSUSisyErTRAhCEQ0IQgEk0IEhCEDSQhAIQhBe6DhRzl0pIMjTVeg9VaZjLZtB/hMP5+yqPD0Mz80uY7ZCBTz6+3zV1mkbixtbR0A7Kiiyj5gPHA44HRacTBa3pmnp0tYjHt57qMmtlM3tVWW0SB2KuZRujN9VW7QJKI69kqxY+Gs0YHiTDmJG1z9jiTXB4XqGp4UgkY+EuDibbfr3XiryY3Hn4geF7poWUNf8KYs7nfxAwBx604cGwuXnmrMnX493vFTSam10LopzsmbxRbyqN8QnlIFNB/NdBqGiF4L9pa4dxyq+LBfA74hY9+pWncdet/WKPCDmgEW0LdgxA3lwFehW1j4739GOr/AMTysGu5kOj4LjK9olLeADZ9gmMud1Ezs48faqXxDrTIMaTExgC8AW4iwPovO3h0jiQCeeXKxyS6bdkZAfTzwwnlx9T7LXyAWBrZGkPIsNbwGhejjxzGaeXc7ndtPbz7qFLMWbQC7usJPJpLNBFJSAJWQRk9AprYxUnsNLdZhkBrn/zdAs7cUEfP2WycVrG5yKzyypsx3vPwgq7hwBI/4RbevXlb0ePHH+HqOnC2Tg39YXln8aODhOYBuHPfhWAYWmv0IWUV5dbefXuo9uaAK6JjJNRpttocOzT0ChyG9vThTe3bZLgQOl9/oouIPB4A+iqE3aXEfsOUiA4g7b70T09kNoOG7p3BTLiw11DgQbCisBFd/dArgOP5dlN1F3P1tRLbFj68qCTSWNsn5crBPitlG5lB47eqlzuAvlPzCHWAQK5Clkymqs3L0rHNLXEOFH0UVaTsbktuwHhVrmlriCKIXLnhca245bQUSpJFa2aaYRSaIE6RSEQIQhAIQkgO6Ed0IBCEIBNjS97WtFucaASWbFcGZkLndGvBP5oO9g05uBpULBwQLefV3dVeYQCSLI9V02YwTYrHAja4WK7qjyYmtJYPid0oKkU7tszQY6J5B9ljLNnXklbAhjhybLvid1a3lauRmRxvc2EbiOoZ8VfM9AlZSW9RgmBLC4fCR69VUzyNa/c0clbGU/Ikbu+Frb5F8qv2G7Jsn3VmO1suP1jdZdbuq9V+yTKdLHnYLrLGuD217jn9l5a5tN4HIXtf2U6M+Dwnkam5pBlyBt46hvB/crR5Wphpv8bf5I6rK04sJkb8F+gNlV5wTK623uHoACvRHYDnwh+3gjqD1XL6zrej6C9zNSyA3IFHyQNzzft2Xm4zLK6xm3q244zeV0rIMMsaKJsf91leGa3nOzdanyJbc/c5xLjwLPA/Kl6jn/aRDuezTcJpHIa6Y/rQXjmdNIZZGiiG/FY/uvQ8Xiy495ZzTz/M5Mc5jMLthdmyyZLZC4NLDbdoqipT5r53ukmdve42XOJcXH1JPJVfuN9Ul0e3e3HrrSb3l55TjZuKixpcVZY0HFnp+6uGNypbpjZBuoNBW/BiBp3ObupbMUAYwGxZFgX0U+WyeoHPouvHCRoudrEY+3Xb3WRrWk9q78KbmuoUUNAaCR0vostMExzQaAP8LJx1A7i6UWgNsAg3+YWQBp3WDwfVZIG/iFg0fXupOYGvFfhI6FAb8YAvd+yHi3Ekt6q6Rjd8RHYj2RXPBHqmbe4D16coddgcfRFYy3guIuuOAoHcTtHAu+vVZKa32PzWEv6g8X6qEHXiunqjmQgAEkX0Ck4mRxoc0PqsQth3A0fRRUXut1kgi65RuDjVkAdwm5vN3x1CxNFAOPIHsoph5a8WenYpTMEzCf5h0J/ZTax8thtk8k+gUAKLmOdR7V6rGzc1VjRI9VArZnZzZFO7haxXJlj63TdLtlQlaaxDRaSEQ0d0rQgdpIQgEJIRdGhCEAhCzNZtaCQs8cblWNunUaXrm7SpIM+bZ92ZbD0Lh6WtOfWjIx3lx23+UD4R9SqYCpAXtafmggl1816Kcs9LqOjxuLHkm6lI7Iy3XNJTD0ZHwP8AKYa2NtM4A7BTa1zjfAA4Ui0N5NH2Wi3b0sOPHCfrGJ4tld/7LSkirkdPdWHVpNfmoSQl7OnPpa28eeuq5vJ4t/tFY8F1BvJcaX1zoGgjSvs70vD205uO0vH/AHHk/qV8xeF9LdrHjPSNNY2zPksaflYv9LX1d9pfibF8EeFDO4Nfkyfw8WD+t1dT/wBo7rn8reWUwjDxtYy5Vzf2jePcXwXoIxcYsk1nIZ/Dj6+UP6nD9h3XzFkS5+pQZmrZk0jmGQMdK48ySOsgfkCT6ceoUNc1jM17V8jP1KYy5EzrcT29h7BV+55iEZcfLaSQ2+AT1P6LZx8X4pqfWvl5byZbvwhkStHEjq+axlxcSSSSeqZCitltagmBaYba2YYS5wFK447pbpPHhs9FcQx7a9VgghDWixz1pbnFgf3XZhj6xz55brISaIJA7XSgegId1HRRcbP8pN9Agn4RRHrys2Bg3YrhSaCenJroU2sPwnv+SbQAAaBF9B6IMjKbfNHssnpuFHqSoDuTY6fCByok7gK9eqyYsri0PBDgR0sjuouPXkN4UGu/iCu5pDnEDpyfRNmj5PJux79CkSHF56tcevRAG9hG6u/Xoobm8D4g2+VFDy4lvNV2Ubb5ZJ/F791jLgXkgW0X1Sc/h1gbvmoqZJaa4NgHragCXDgXR6WmwhwG6gfU9/ZYzM0SFsILn9qFgfNNmknFu0eldysImYCWsokjkBMhlguBe88VZpDnHbtDQ1vt2UVB2TI1p/hOArkg9UmzMlIALdx546JuFfCe4+L2WExg+g56jhY3bKaZ3AFm49+Heq0pBtd1W1HIWNp5BrvXB/3WGdtt3A2Vq5MdzbLHqooStNc7M7TUU0DQhCIEihJFNCSYQCaEIMkTN3KzOceB2Ci1u1gtBAHAXXhjrFpyu6xuN+q24Yw4EucLrn1WrxtJUoMny5QCBsdwT3WHNj7YunxeT0z7+VvGmuG0KQA3U8/COpHosoI8sVVHuo7Wg2aPPRcT2tMZLHf9NwPPFKLRe4k2O/KyvFVtHVONvFeiVJP9dx9ieDFP9rWFLLQZiwSzEntQr+6o/ta8bHxh47yZ4JS/TcS4MSujmg8vH/keb+Sp9N1zK0JmqzYUhjycmF2KyRvVocRvr044+q5d7DXsFuwwvt7vK5MpP0jGXCkgC88A10U2QbvxfqtpjGsYSB09VsmNv1puUjRkbRruFjDbK2Hjdbu7issECnpurvUQihvqFvww04cdSmyOq6cLbY0N2kWAf1K6MMNNOWR7Q35juSmOBfQjpafXrXH7pObXb6rY1j4ttAH50pNb8PHRSA2m221p7eyKJJIsj2REmtcKI5PcWsgA5APxenVRLi5wLiAT9FFz6JANcc8Wr8DcbsCuOeSkSKHXb0ohI8gNd8zz0SLwIiO98GuybCMjWmh+Ec+ik59g1YB5BWmSHOHb5lbDOBZPzFUpKumRpa4nzLq+g5pa73En19j2TfI3dx+OuoWIVe4nj3ClqxMvvgGuK9UjTWk9gOyiHdBx6g+ikLkcG/yx9yOqDJ5cTsSMyFwsnm+g4q/bqsItzyA1oa3pt6KU8hdQA3dQWn09VBhLa42jsoG6/wAJafqVIj4Krp0CkQXOIaee5SNcAE13pZIxO3cg/kVh230FArY55DgNt9CsVbuL59VLFlRdQPw8i+qTuRdceilt+fyUQ6nHi1jpkwUmhC4m0JpIQNCSEDSQhAIQhA1OMW8V25WO1miF2VnhN5SJldRmcQ4e5612WMus/JZCBtKxtb8V9gutpiLzxXotc2PkthzS4k3/ALrC4UPksazxb2Bklx8pzhwOLW+aJ4P0XN7nMeHMNEd1d4eUMqGhw9v4guPlx1dvW8Xm9p6X62KO0X1H5LIywSe3X3SY1t0aPzTe/bGXE8sB49lq1vp12yTdVEztklAiw4u4PcrXfK0dKJ9k8l5JdRO48kdll+4wDCxpBIXTy7zIwN/AAQGj68ldvzWMeDb7W5VjZTw0NHXqpSRlrQyzbuSPZbLGNjN9gFryPa9znHm+lHstmumvfbVYzzJQKoBWMcYawUKvuVHHgLWbiPzWyL7dD6q446TLLaJbR6gH2Uyflx2KA0hxB/L0RVEB/wALu6zYpk24tA4/O1FtOFG6B6BSkPwtA9UH+mgeeqA6CjyevREfUWePUI3U55dZPavX3TBsgbeaukEj8IPS/XqsZdX4j8Xqh7r9+590MdfPHw8oJF1mgefyWrLIOoWSR/Dg0+3C03uJNdeb5WOVWRmZ8XB5Nda/us1+3QV06qEdCMkk9OOQsTnlwIoUT6VSvw+pNF2WWW334U3Du0g+6ixgaA693FBRNEdObN2oqV7Yie54APqmwVEWkgOHCgG7/iNiujeqZp1g213Y2qhABvxuA3VV1RU2tujxyVGwG802vbkrK0Uz4Rd9LHT3SFRIPPWz3UeCPWu6lVNBN10HHVRIId8XpYIRBZArrfWuFEgnbTg4nsmD1vmhzYWMCnHsb/NKsRcSD16cKBPBrhZibJFUsJABo/upWUY0IQuFtCEJWgaEWhAIQhAIQhALPGPh46nusC2Y/wAC28M/Zjn8ScSeKoJD8PH6pE339kySKA+VrpakC2qHJ9eFjcOv91mq+D+YUS1TSytRzbsqEEzsXID23XRwHcLc8umkk/Ra0kVe6154bjdhnq7jooXCePzIzbHDqsWY/bDsAO5xs+lKr0/LOPN5bz/Dd+hWxmS+ZPw621Q91o48NZ/9O7n8iZcPX2taOHzZgHXXJ/JbRj2RsBAscuB7eihFI2Nwe2t1U36pueXuIb1uyV0zHvbzbalIW+VTj8Z4A9FgYxm9vHQ0OVKU0dtAD9VkibdnueCs/tY/IzimRA8g+pUrBrcbpIADgg8cjnqhxbQGw0fRZMTc7dJbnFxPPqbUxYZuNX3JCxtDT8bhzXVSFm7oCr+qA3ucRXTsn2s9fXokSQ7ngVzabi0vo1Vc0gXQlvfuVIuAYexPF0ojp169aUCbaS0mjwQB1QS4ceLvsE3PIj3dHH0CxgbuBXPQ9Ck6QiiK49D+qg15n81ZocUoNALyOnvag91vodlli2gE0HfRYfaz+RlPwsAsH0Cwt5eA8gAi0pHXwCPQKTB7iiefZX7T+MpN0aqxdBY3EsYbHJPQqYsHjmvVNry6QEVwKBPYqsTLBTQHAEivml/EcbkINcWVlLAG1QsnhYnEgANIbx0VCA3dDfFLJR5a3fzzSxjdQN7a4HHCk55aA2RvI/m7kIJXXcg/so7jXVvKRcTdUfohp+P4mij1FJtNImy+mjqOeyg8/GBQ2k91LsORZKjIB5nxDn2RYVm77+iUnxNe+62kUa62mSOCOldFjfR5+EewKlZRjQhC4W0FLshCKSfZCEQ0IQgEIQgFsN5jCELdw/awzMcnn1T6X80IXS1pdSwdkiKNdihCMQ5oHQLE7r9EIUrLFrvaPOj46kLcexvmuFcAIQsZ9rO/xjrkH3WxGK573SEKxKTuHyLKwA1fdCFlGFS6B1f1Uon8XU9fVCFRkaLjBPUqNne72IQhKCMkmrNVaZ5DP+67QhSKgCfvNdt1IlO0fDwhCfw/qf8AbotfIcRFY631pCEvwn1o1U9DpRW20AQChSELDH+ssv4xzcyOPcKUJLmEO54QhWfT+G7gAjsQs7ACwXz3/RCFYl+Mz2NY5rWim+iwyAeS80LFUShCyrCMY6NPFk8ocO/e0IUZBop5A6JgfiPuhCCIA2tPchYnuLpnWeiEKVYkQDTq55UZgBVCuEIS/CfX/9k=" alt="Antonio Pontin" loading="eager">
+  </div>
+  </div><!-- /.hero-layout -->
+  <p class="hero-bio">
+    My research centres on <strong>quantum optomechanics</strong> — the study of mechanical oscillators
+    coupled to light at or near the quantum limit. Over fifteen years I have worked across two
+    complementary platforms: levitated nanoparticles in optical tweezers and Paul traps, and
+    micro-fabricated MOMS resonators in Fabry–Pérot cavities. The unifying goal is to bring
+    macroscopic mechanical objects into the quantum regime and exploit them for precision sensing
+    and fundamental physics tests.
+  </p>
+
+  <div class="about-grid">
+    <div class="about-stat">
+      <div class="about-stat-num">44</div>
+      <div class="about-stat-label">Publications</div>
+    </div>
+    <div class="about-stat">
+      <div class="about-stat-num">15+</div>
+      <div class="about-stat-label">Years active</div>
+    </div>
+    <div class="about-stat">
+      <div class="about-stat-num">3</div>
+      <div class="about-stat-label">Major grants</div>
+    </div>
+    <div class="about-stat">
+      <div class="about-stat-num">8+</div>
+      <div class="about-stat-label">Invited talks</div>
+    </div>
+  </div>
+
+  <div class="about-pillars">
+    <div class="pillar">
+      <div class="pillar-title">Levitated Optomechanics</div>
+      <div class="pillar-body">Nanoparticles in optical tweezers and Paul traps — cooling all six degrees of freedom, Coulomb coupling, and multi-particle entanglement.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">MOMS &amp; Quantum Squeezing</div>
+      <div class="pillar-body">Silicon and silicon nitride micro-oscillating mirrors for ponderomotive squeezing, QND measurement, and quantum displacement sensing.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">Fundamental Physics</div>
+      <div class="pillar-body">Bounds on wave-function collapse models (CSL, Diósi–Penrose), deformed commutators, and directional dark matter searches with levitated sensors.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: RESEARCH
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="research">
+  <div class="pg-header">
+    <span class="pg-eyebrow">Research</span>
+    <h2>Quantum Optomechanics at the Limit</h2>
+  </div>
+
+  <div class="mgrid">
+
+    <div class="mgrid-label">Levitated<br>Optomechanics</div>
+    <div class="mgrid-body" style="margin-bottom:44px;">
+      <h3>Nanoparticles as ultraclean mechanical oscillators</h3>
+      <p>A central thrust of my work at UCL is the development of nanoparticles levitated in optical tweezers and Paul traps — isolated from their environment by the absence of any mechanical contact. Key achievements include the <strong>first simultaneous cavity cooling of all six degrees of freedom</strong> (translational and rotational) of a single nanoparticle (<em>Nature Physics</em>, 2023).</p>
+      <p>I demonstrated <strong>directional force sensing via cross-correlations</strong> between translational modes, realising a 'force compass' for detecting stochastic signals from specific directions (<em>Physical Review Research</em>, 2024). More recently, strong <strong>Coulomb coupling between two co-levitated nanospheres</strong> and the emergence of dark modes in their joint motion (<em>Optica</em>, 2024; <em>PRL</em>, 2025), and <strong>high-purity two-dimensional quantum states</strong> (<em>Nature Communications</em>, 2025). Engineering contributions include robust 3D feedback cooling schemes, imaging-based detection, and systematic comparisons of feedback cooling methods.</p>
+    </div>
+
+    <div class="mgrid-label">MOMS Resonators &amp;<br>Quantum State<br>Engineering</div>
+    <div class="mgrid-body" style="margin-bottom:44px;">
+      <h3>Micro-oscillating mirrors in Fabry–Pérot cavities</h3>
+      <p>In collaboration with groups in Trento and Florence, I contributed to the design, fabrication, and characterisation of silicon and silicon nitride micro-oscillating mirrors with simultaneously low optical and mechanical losses — the prerequisite for quantum-noise-limited cavity optomechanics.</p>
+      <p>Building on this platform, I demonstrated <strong>ponderomotive squeezing via parametric modulation of the optical spring</strong> (<em>PRL</em>, 2014; <em>PRL</em>, 2016), <strong>quantum non-demolition measurement of optical field fluctuations</strong> (<em>PRA</em>, 2018), and novel heterodyne signal-processing techniques for quantum displacement sensing (<em>PRL</em>, 2018). These experiments pushed optomechanical systems toward the standard quantum limit and established practical routes to continuous-variable entanglement between macroscopic modes.</p>
+    </div>
+
+    <div class="mgrid-label">Fundamental<br>Physics</div>
+    <div class="mgrid-body" style="margin-bottom:44px;">
+      <h3>Beyond the standard model with mechanical sensors</h3>
+      <p>The extreme sensitivity of levitated oscillators makes them ideal probes of physics beyond the standard model. I have used Paul-trap nanoparticles to set competitive bounds on <strong>spontaneous wave-function collapse models</strong> (CSL and Diósi–Penrose), exploiting mechanical quality factors approaching 10¹² (<em>Physical Review Research</em>, 2020).</p>
+      <p>I have also contributed to probing <strong>deformed canonical commutators</strong> predicted by quantum gravity (<em>Nature Communications</em>, 2015), and to a perspective on using levitated sensors for <strong>directional dark matter searches</strong>, including the potential of quantum superpositions of mesoscopic particles for rare-event detection (<em>AVS Quantum Science</em>, 2024).</p>
+    </div>
+
+    <div class="mgrid-label">Outlook</div>
+    <div class="mgrid-body">
+      <h3>Current and future directions</h3>
+      <p>Current work focuses on generating genuine <strong>quantum entanglement between pairs of levitated nanoparticles</strong> via Coulomb coupling and coherent scattering, preparing non-classical motional states for tests of macroscopic quantum mechanics, and developing <strong>directional sensing protocols for ultralight dark matter</strong> searches.</p>
+      <p>The platform of levitated nano-oscillators — now controllable across all six degrees of freedom and in multi-particle configurations — provides a uniquely versatile testbed at the intersection of quantum information, precision metrology, and fundamental physics.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: PUBLICATIONS
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="publications">
+  <div class="pg-header">
+    <span class="pg-eyebrow">Publications</span>
+    <h2>44 entries · 2008–2026</h2>
+  </div>
+
+  <!-- 2026 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2026</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">1</span>
+        <div>
+          <div class="pub-title">Roto-translational levitated optomechanics</div>
+          <div class="pub-authors">M. Rademacher, <strong>A. Pontin</strong>, J.M.H. Gosling, P.F. Barker, M. Toroš</div>
+          <div class="pub-ref">Physics Reports 1187, 1–66 (2026)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">2</span>
+        <div>
+          <div class="pub-title">Feedback cooling scheme for an optically levitated oscillator with controlled crosstalk</div>
+          <div class="pub-authors">J.M.H. Gosling, <strong>A. Pontin</strong>, F. Alder, M. Rademacher, T.S. Monteiro, P.F. Barker</div>
+          <div class="pub-ref">Review of Scientific Instruments 97 (2026)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">3</span>
+        <div>
+          <div class="pub-title">Optical squeezing mediated by levitated oscillators at their quantum ground state</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, Q. Deplano, F. Marino, F. Marin</div>
+          <div class="pub-preprint">arXiv:2604.26790 (2026) — preprint</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">4</span>
+        <div>
+          <div class="pub-title">Stationary entanglement of a levitated oscillator with an optical field</div>
+          <div class="pub-authors">Q. Deplano, <strong>A. Pontin</strong>, F. Marino, F. Marin</div>
+          <div class="pub-preprint">arXiv:2602.03456 (2026) — preprint</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">5</span>
+        <div>
+          <div class="pub-title">Probing gravitational interaction between milligram optomechanical oscillators operating in the quantum regime</div>
+          <div class="pub-authors">M. Bonaldi, A. Borrielli, G. Di Giuseppe, N. Malossi, F. Marin, F. Marino, <strong>A. Pontin</strong> <em>et al.</em></div>
+          <div class="pub-preprint">arXiv:2607.18351 (2026) — preprint</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2025 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2025</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">6</span>
+        <div>
+          <div class="pub-title">Strong coupling and dark modes in the motion of a pair of levitated nanoparticles</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, Q. Deplano, A. Ranfagni, F. Marino, F. Marin</div>
+          <div class="pub-ref">Physical Review Letters 135, 073602 (2025)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">7</span>
+        <div>
+          <div class="pub-title">High purity two-dimensional levitated mechanical oscillator</div>
+          <div class="pub-authors">Q. Deplano, <strong>A. Pontin</strong>, A. Ranfagni, F. Marino, F. Marin</div>
+          <div class="pub-ref">Nature Communications 16, 4215 (2025)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2024 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2024</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">8</span>
+        <div>
+          <div class="pub-title">Coulomb coupling between two nanospheres trapped in a bichromatic optical tweezer</div>
+          <div class="pub-authors">Q. Deplano, <strong>A. Pontin</strong>, A. Ranfagni, F. Marino, F. Marin</div>
+          <div class="pub-ref">Optica 11, 1773 (2024)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">9</span>
+        <div>
+          <div class="pub-title">Dark matter searches with levitated sensors</div>
+          <div class="pub-authors">E. Kilian, M. Rademacher, J.M.H. Gosling, J.H. Iacoponi, F. Alder, M. Toroš, <strong>A. Pontin</strong>, C. Ghag, S. Bose, T.S. Monteiro, P.F. Barker</div>
+          <div class="pub-ref">AVS Quantum Science 6 (2024)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">10</span>
+        <div>
+          <div class="pub-title">Sensing directional noise baths in levitated optomechanics</div>
+          <div class="pub-authors">J.M.H. Gosling, <strong>A. Pontin</strong>, J.H. Iacoponi, P.F. Barker, T.S. Monteiro</div>
+          <div class="pub-ref">Physical Review Research 6, 013129 (2024)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">11</span>
+        <div>
+          <div class="pub-title">Levitodynamic spectroscopy for single nanoparticle characterisation</div>
+          <div class="pub-authors">J.M.H. Gosling, M. Rademacher, J.T. Mulder, A.J. Houtepen, M. Toroš, <strong>A. Pontin</strong>, P.F. Barker, T.S. Monteiro</div>
+          <div class="pub-preprint">arXiv:2401.11551 (2024) — preprint</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2023 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2023</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">12</span>
+        <div>
+          <div class="pub-title"><span class="highlight-badge">Nature Physics</span>Simultaneous cavity cooling of all six degrees of freedom of a levitated nanoparticle</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, H. Fu, M. Toros, T.S. Monteiro, P.F. Barker</div>
+          <div class="pub-ref">Nature Physics (2023)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">13</span>
+        <div>
+          <div class="pub-title">Sympathetic cooling and squeezing of two colevitated nanoparticles</div>
+          <div class="pub-authors">T.W. Penny, <strong>A. Pontin</strong>, P.F. Barker</div>
+          <div class="pub-ref">Physical Review Research 5, 013070 (2023)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">14</span>
+        <div>
+          <div class="pub-title">Controlling mode orientations and frequencies in levitated cavity optomechanics</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, H. Fu, J. Iacoponi, P.F. Barker, T.S. Monteiro</div>
+          <div class="pub-ref">Physical Review Research 5, 013013 (2023)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2022 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2022</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">15</span>
+        <div>
+          <div class="pub-title">Measurement of single nanoparticle anisotropy by laser induced optical alignment and Rayleigh scattering</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, H. Fu, J. Iacoponi, P.F. Barker, T.S. Monteiro</div>
+          <div class="pub-ref">Applied Physics Letters 121, 221102 (2022)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">16</span>
+        <div>
+          <div class="pub-title">Cavity optomechanics in a fiber cavity: the role of stimulated Brillouin scattering</div>
+          <div class="pub-authors">A. Beregi, <strong>A. Pontin</strong>, P.F. Barker</div>
+          <div class="pub-ref">New Journal of Physics 24, 093023 (2022)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">17</span>
+        <div>
+          <div class="pub-title">Imaging based feedback cooling of a levitated nanoparticle</div>
+          <div class="pub-authors">Y. Minowa, K. Kato, S. Ueno, T.W. Penny, <strong>A. Pontin</strong>, M. Ashida, P.F. Barker</div>
+          <div class="pub-ref">Review of Scientific Instruments 93, 075109 (2022)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2021 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2021</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">18</span>
+        <div>
+          <div class="pub-title">Performance and limits of feedback cooling methods for levitated oscillators: a direct comparison</div>
+          <div class="pub-authors">T.W. Penny, <strong>A. Pontin</strong>, P.F. Barker</div>
+          <div class="pub-ref">Physical Review A 104, 023502 (2021)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">19</span>
+        <div>
+          <div class="pub-title">Quadratic optomechanical cooling of a cavity-levitated nanosphere</div>
+          <div class="pub-authors">N.P. Bullier, <strong>A. Pontin</strong>, P.F. Barker</div>
+          <div class="pub-ref">Physical Review Research 3, L032022 (2021)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2020 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2020</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">20</span>
+        <div>
+          <div class="pub-title">An ultra-narrow linewidth levitated nano-oscillator for testing dissipative wavefunction collapse</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, N.P. Bullier, M. Toroš, P.F. Barker</div>
+          <div class="pub-ref">Physical Review Research 2, 023349 (2020)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">21</span>
+        <div>
+          <div class="pub-title">Characterization of a charged particle levitated nano-oscillator</div>
+          <div class="pub-authors">N.P. Bullier, <strong>A. Pontin</strong>, P.F. Barker</div>
+          <div class="pub-ref">Journal of Physics D: Applied Physics 53, 175302 (2020)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2019 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2019</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">22</span>
+        <div>
+          <div class="pub-title">Super-resolution imaging of a low frequency levitated oscillator</div>
+          <div class="pub-authors">N.P. Bullier, <strong>A. Pontin</strong>, P.F. Barker</div>
+          <div class="pub-ref">Review of Scientific Instruments 90, 093201 (2019)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">23</span>
+        <div>
+          <div class="pub-title">Testing collapse models with levitated nanoparticles: the detection challenge</div>
+          <div class="pub-authors">A. Vinante, <strong>A. Pontin</strong>, M. Rashid, M. Toros, P.F. Barker, H. Ulbricht</div>
+          <div class="pub-ref">Physical Review A 100, 012119 (2019)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">24</span>
+        <div>
+          <div class="pub-title">Calibrated quantum thermometry in cavity optomechanics</div>
+          <div class="pub-authors">A. Chowdhury, P. Vezio, M. Bonaldi, A. Borrielli, F. Marino, B. Morana, G. Pandraud, <strong>A. Pontin</strong>, G.A. Prodi, P.M. Sarro, E. Serra, F. Marin</div>
+          <div class="pub-ref">Quantum Science and Technology 4, 024007 (2019)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2018 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2018</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">25</span>
+        <div>
+          <div class="pub-title">Silicon Nitride MOMS Oscillator for room temperature quantum optomechanics</div>
+          <div class="pub-authors">E. Serra, B. Morana, A. Borrielli, F. Marin, G. Pandraud, <strong>A. Pontin</strong>, G.A. Prodi, P.M. Sarro, M. Bonaldi</div>
+          <div class="pub-ref">Journal of Microelectromechanical Systems 27, 1193 (2018)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">26</span>
+        <div>
+          <div class="pub-title">Quantum non-demolition measurement of optical field fluctuations by optomechanical interaction</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, M. Bonaldi, A. Borrielli, L. Marconi, F. Marino, G. Pandraud, G.A. Prodi, P.M. Sarro, E. Serra, F. Marin</div>
+          <div class="pub-ref">Physical Review A 97, 033833 (2018)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">27</span>
+        <div>
+          <div class="pub-title">Levitated optomechanics with a fiber Fabry–Pérot interferometer</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, L.S. Mourounas, A.A. Geraci, P.F. Barker</div>
+          <div class="pub-ref">New Journal of Physics 20, 023017 (2018)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">28</span>
+        <div>
+          <div class="pub-title">Imaging correlations in heterodyne spectra for quantum displacement sensing</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, J.E. Lang, A. Chowdhury, P. Vezio, F. Marino, B. Morana, E. Serra, F. Marin, T.S. Monteiro</div>
+          <div class="pub-ref">Physical Review Letters 120, 020503 (2018)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2016 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2016</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">29</span>
+        <div>
+          <div class="pub-title">Control of recoil losses in nanomechanical SiN membrane resonators</div>
+          <div class="pub-authors">A. Borrielli, L. Marconi, F. Marin, F. Marino, B. Morana, G. Pandraud, <strong>A. Pontin</strong>, G.A. Prodi, P.M. Sarro, E. Serra, M. Bonaldi</div>
+          <div class="pub-ref">Physical Review B 94, 121403(R) (2016)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">30</span>
+        <div>
+          <div class="pub-title">Microfabrication of large area high-stress silicon nitride membranes for optomechanical devices</div>
+          <div class="pub-authors">E. Serra, M. Bawaj, A. Borrielli <em>et al.</em>, <strong>A. Pontin</strong>, G.A. Prodi, M. Rossi, P.M. Sarro, D. Vitali, M. Bonaldi</div>
+          <div class="pub-ref">AIP Advances 6, 065004 (2016)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">31</span>
+        <div>
+          <div class="pub-title">Dynamical two-mode squeezing of thermal fluctuations in a cavity opto-mechanical system</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, M. Bonaldi, A. Borrielli, L. Marconi, F. Marino, G. Pandraud, G.A. Prodi, P.M. Sarro, E. Serra, F. Marin</div>
+          <div class="pub-ref">Physical Review Letters 116, 103601 (2016)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2015 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2015</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">32</span>
+        <div>
+          <div class="pub-title">Fabrication and characterization of low loss MOMS resonators for cavity optomechanics</div>
+          <div class="pub-authors">E. Serra, M. Bonaldi, A. Borrielli, F. Marin, L. Marconi, F. Marino, G. Pandraud, <strong>A. Pontin</strong>, G.A. Prodi, P.M. Sarro</div>
+          <div class="pub-ref">Microelectronic Engineering 145, 138–142 (2015)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">33</span>
+        <div>
+          <div class="pub-title">Low-loss optomechanical oscillator for quantum-optics experiments</div>
+          <div class="pub-authors">A. Borrielli, <strong>A. Pontin</strong>, F.S. Cataliotti, L. Marconi, F. Marin, F. Marino, G. Pandraud, G.A. Prodi, E. Serra, M. Bonaldi</div>
+          <div class="pub-ref">Physical Review Applied 3, 054009 (2015)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">34</span>
+        <div>
+          <div class="pub-title">Dynamical back-action effects in low loss optomechanical oscillators</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, M. Bonaldi, A. Borrielli, F. Marino, L. Marconi, A. Bagolini, G. Pandraud, E. Serra, G.A. Prodi, F. Marin</div>
+          <div class="pub-ref">Annalen der Physik 527, 89–99 (2015)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">35</span>
+        <div>
+          <div class="pub-title"><span class="highlight-badge">Nature Comms</span>Probing deformed commutators with macroscopic harmonic oscillators</div>
+          <div class="pub-authors">M. Bawaj, C. Biancofiore, M. Bonaldi <em>et al.</em>, <strong>A. Pontin</strong>, G.A. Prodi, E. Serra, D. Vitali, F. Marin</div>
+          <div class="pub-ref">Nature Communications 6, 7503 (2015)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">36</span>
+        <div>
+          <div class="pub-title">Design of silicon micro-resonators with low mechanical and optical losses for quantum optics experiments</div>
+          <div class="pub-authors">A. Borrielli, M. Bonaldi, E. Serra <em>et al.</em>, <strong>A. Pontin</strong>, G.A. Prodi, G. Pandraud, P.M. Sarro, G. Lorito, T. Zoumpoulidis</div>
+          <div class="pub-ref">Microsystem Technologies (2015)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2014 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2014</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">37</span>
+        <div>
+          <div class="pub-title">Frequency noise cancellation in opto-mechanical systems for ponderomotive squeezing</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, C. Biancofiore, E. Serra, A. Borrielli, F.S. Cataliotti, F. Marino, G.A. Prodi, M. Bonaldi, F. Marin, D. Vitali</div>
+          <div class="pub-ref">Physical Review A 89, 033810 (2014)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">38</span>
+        <div>
+          <div class="pub-title">Detection of weak stochastic force in a parametrically stabilized micro optomechanical system</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, M. Bonaldi, A. Borrielli, F.S. Cataliotti, F. Marino, G.A. Prodi, E. Serra, F. Marin</div>
+          <div class="pub-ref">Physical Review A 89, 023848 (2014)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">39</span>
+        <div>
+          <div class="pub-title">Squeezing a thermal mechanical oscillator by stabilized parametric effect on the optical spring</div>
+          <div class="pub-authors"><strong>A. Pontin</strong>, M. Bonaldi, A. Borrielli, F.S. Cataliotti, F. Marino, G.A. Prodi, E. Serra, F. Marin</div>
+          <div class="pub-ref">Physical Review Letters 112, 023601 (2014)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2013 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2013</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">40</span>
+        <div>
+          <div class="pub-title">Fabrication of low loss MOMS resonators for quantum optics experiments</div>
+          <div class="pub-authors">E. Serra, A. Bagolini, A. Borrielli, M. Boscardin, F.S. Cataliotti, F. Marin, F. Marino, <strong>A. Pontin</strong>, G.A. Prodi, M. Vannoni, M. Bonaldi</div>
+          <div class="pub-ref">Journal of Micromechanics and Microengineering 23, 085010 (2013)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2012 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2012</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">41</span>
+        <div>
+          <div class="pub-title">Ultralow-dissipation micro-oscillator for quantum optomechanics</div>
+          <div class="pub-authors">E. Serra, A. Borrielli, F.S. Cataliotti, F. Marin, F. Marino, <strong>A. Pontin</strong>, G.A. Prodi, M. Bonaldi</div>
+          <div class="pub-ref">Physical Review A 86, 051801(R) (2012)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">42</span>
+        <div>
+          <div class="pub-title">A "low deformation mirror" micro-oscillator with ultra-low optical and mechanical losses</div>
+          <div class="pub-authors">E. Serra, A. Borrielli, F.S. Cataliotti, F. Marin, F. Marino, <strong>A. Pontin</strong>, G.A. Prodi, M. Bonaldi</div>
+          <div class="pub-ref">Applied Physics Letters 101, 071101 (2012)</div>
+        </div>
+      </li>
+      <li class="pub-item">
+        <span class="pub-num">43</span>
+        <div>
+          <div class="pub-title">Inhomogeneous mechanical losses in micro-oscillators with high reflectivity coating</div>
+          <div class="pub-authors">E. Serra, F.S. Cataliotti, F. Marin, F. Marino, <strong>A. Pontin</strong>, G.A. Prodi, M. Bonaldi</div>
+          <div class="pub-ref">Journal of Applied Physics 111, 113109 (2012)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 2008 -->
+  <div class="pub-year-group">
+    <div class="pub-year-label">2008</div>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-num">44</span>
+        <div>
+          <div class="pub-title">Design of wideband acoustic detectors of gravitational waves equipped with displacement concentrators</div>
+          <div class="pub-authors">P. Leaci, A. Vinante, M. Bonaldi, P. Falferi, <strong>A. Pontin</strong>, G.A. Prodi, J.P. Zendri</div>
+          <div class="pub-ref">Physical Review D 77, 062001 (2008)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <p style="font-size:13px;color:var(--text-3);margin-top:12px;">† Conference proceedings available in full CV. † Publication count excludes proceedings.</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: NEWS
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="news">
+  <div class="pg-header">
+    <span class="pg-eyebrow">News</span>
+    <h2>Recent updates</h2>
+  </div>
+
+  <ul class="news-list">
+
+    <li class="news-item">
+      <div class="news-date">Jul 2025</div>
+      <div>
+        <div><span class="news-tag preprint">Preprint</span></div>
+        <div class="news-headline">New preprint: Roto-translational optomechanics</div>
+        <div class="news-body">Together with M. Rademacher, J.M.H. Gosling, P.F. Barker and M. Toros, we posted a new manuscript on arXiv (2507.20905) exploring the coupled roto-translational dynamics of levitated nanoparticles.</div>
+      </div>
+    </li>
+
+    <li class="news-item">
+      <div class="news-date">Jun 2025</div>
+      <div>
+        <div><span class="news-tag preprint">Preprint</span></div>
+        <div class="news-headline">New preprint: Feedback cooling with controlled crosstalk</div>
+        <div class="news-body">A new manuscript with J.M.H. Gosling and the UCL group introduces a feedback cooling scheme for optically levitated oscillators that allows precise control of mode crosstalk (arXiv:2506.17172).</div>
+      </div>
+    </li>
+
+    <li class="news-item">
+      <div class="news-date">May 2025</div>
+      <div>
+        <div><span class="news-tag pub">Publication</span></div>
+        <div class="news-headline">Nature Communications: high-purity 2D quantum states of levitated nanoparticles</div>
+        <div class="news-body">Our paper with Q. Deplano, A. Ranfagni, F. Marino and F. Marin demonstrating high-purity two-dimensional levitated mechanical oscillator states is published in <em>Nature Communications</em> (16, 4215).</div>
+      </div>
+    </li>
+
+    <li class="news-item">
+      <div class="news-date">Aug 2024</div>
+      <div>
+        <div><span class="news-tag pub">Publication</span></div>
+        <div class="news-headline">PRL: Strong coupling and dark modes in a pair of levitated nanoparticles</div>
+        <div class="news-body">Our work demonstrating strong Coulomb coupling and the emergence of dark modes between two co-levitated nanospheres is published in <em>Physical Review Letters</em> 135, 073602.</div>
+      </div>
+    </li>
+
+    <li class="news-item">
+      <div class="news-date">Nov 2024</div>
+      <div>
+        <div><span class="news-tag pub">Publication</span></div>
+        <div class="news-headline">Optica: Coulomb coupling between two nanospheres in a bichromatic tweezer</div>
+        <div class="news-body">Published in <em>Optica</em> 11, 1773. We realise strong inter-particle coupling between two charged nanoparticles trapped in a bichromatic optical tweezer, opening routes to two-particle entanglement.</div>
+      </div>
+    </li>
+
+    <li class="news-item">
+      <div class="news-date">Sep 2023</div>
+      <div>
+        <div><span class="news-tag talk">Invited Talk</span></div>
+        <div class="news-headline">Invited lecture at "Exploiting Levitated Particles in the Quantum Regime", Bad Honnef</div>
+        <div class="news-body">Presented our work on the simultaneous cooling of all six degrees of freedom of a levitated nanoparticle by elliptic coherent scattering.</div>
+      </div>
+    </li>
+
+    <li class="news-item">
+      <div class="news-date">Oct 2023</div>
+      <div>
+        <div><span class="news-tag award">Position</span></div>
+        <div class="news-headline">New position at CNR – Istituto Nazionale di Ottica, Sesto Fiorentino</div>
+        <div class="news-body">Joined CNR–INO in Sesto Fiorentino, continuing research on levitated nanoparticle systems with the Florence optomechanics group.</div>
+      </div>
+    </li>
+
+    <li class="news-item">
+      <div class="news-date">2023</div>
+      <div>
+        <div><span class="news-tag pub">Publication</span></div>
+        <div class="news-headline">Nature Physics: first simultaneous 6-DOF cooling of a levitated nanoparticle</div>
+        <div class="news-body">Our landmark paper demonstrating simultaneous cavity cooling of all six mechanical degrees of freedom of a single levitated nanoparticle is published in <em>Nature Physics</em>. This represents a major milestone toward full quantum control of a rigid body.</div>
+      </div>
+    </li>
+
+    <li class="news-item">
+      <div class="news-date">May 2022</div>
+      <div>
+        <div><span class="news-tag award">Grant</span></div>
+        <div class="news-headline">EPSRC grant awarded: £1M for levitated cavity optomechanics</div>
+        <div class="news-body">Co-investigator on a new EPSRC grant (EP/W029626/1, £1,000,000) for fundamental science and technology with levitated cavity optomechanics, led by UCL.</div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: GRANTS
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="grants">
+  <div class="pg-header">
+    <span class="pg-eyebrow">Grants &amp; Funding</span>
+    <h2>Research funding</h2>
+  </div>
+
+  <div class="mgrid">
+    <div class="mgrid-label">2022<br>EPSRC</div>
+    <div class="mgrid-body" style="margin-bottom:36px;">
+      <div class="grant-title">Fundamental science and technology with levitated cavity optomechanics</div>
+      <div class="grant-meta" style="margin-top:6px;">
+        <p><strong>Role:</strong> Researcher Co-Investigator &nbsp;·&nbsp; <strong>Value:</strong> £1,000,000</p>
+        <p>Reference: EP/W029626/1. Research into the fundamental quantum physics and technological applications of levitated nano-oscillators in optical cavities, conducted at UCL.</p>
+      </div>
+    </div>
+
+    <div class="mgrid-label">2017–2019<br>Marie Curie</div>
+    <div class="mgrid-body" style="margin-bottom:36px;">
+      <div class="grant-title">Quantum control of levitated nanoparticles — QUCLN</div>
+      <div class="grant-meta" style="margin-top:6px;">
+        <p><strong>Role:</strong> Principal Fellow &nbsp;·&nbsp; <strong>Value:</strong> €183,000</p>
+        <p>Marie Skłodowska-Curie Individual Fellowship, hosted at UCL London. Funded experimental research on quantum optomechanics with levitated nanoparticles, with visits to JILA (Regal group), Yale (Harris group), and University of Nevada Reno (Geraci group).</p>
+      </div>
+    </div>
+
+    <div class="mgrid-label">2010–2014<br>INFN</div>
+    <div class="mgrid-body">
+      <div class="grant-title">Ph.D. Scholarship in Experimental Quantum Optomechanics</div>
+      <div class="grant-meta" style="margin-top:6px;">
+        <p><strong>Role:</strong> Ph.D. Student &nbsp;·&nbsp; Full scholarship for the duration of the programme</p>
+        <p>Funded by INFN (Istituto Nazionale di Fisica Nucleare), University of Trento. Research focused on stabilised optomechanical systems for quantum optics.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: TALKS
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="talks">
+  <div class="pg-header">
+    <span class="pg-eyebrow">Talks &amp; Conferences</span>
+    <h2>Selected invited lectures</h2>
+  </div>
+
+  <ul class="talk-list" style="margin-bottom:44px;">
+
+    <li class="talk-item">
+      <div class="talk-date">Sep 2023</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Simultaneous cooling of all six degrees of freedom of an optically levitated nanoparticle by elliptic coherent scattering</div>
+        <div class="talk-venue">Exploiting Levitated Particles in the Quantum Regime · Bad Honnef, Germany</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Aug 2023</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Translational and librational cooling by elliptic coherent scattering</div>
+        <div class="talk-venue">Quantum Sensing and Fundamental Physics with Levitated Systems · Trento, Italy</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Aug 2023</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Fundamental physics with levitated optomechanics at UCL</div>
+        <div class="talk-venue">COLMO · Trento, Italy</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Aug 2022</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Levitated cavity optomechanics at UCL exploiting coherent scattering</div>
+        <div class="talk-venue">SPIE Nanoscience + Engineering · San Diego, USA</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Jan 2022</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Testing fundamental physics with a charged particle nano-oscillator</div>
+        <div class="talk-venue">Photonics West · San Francisco, USA</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Jan 2022</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Cavity cooling by quadratic coupling in a levitated optomechanical system</div>
+        <div class="talk-venue">Photonics West · San Francisco, USA</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Dec 2020</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Quadratic optomechanical cooling of a cavity-levitated nanosphere</div>
+        <div class="talk-venue">UniKORN Frontier Seminar (livestream)</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Sep 2019</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>An ultra-narrow linewidth levitated nano-oscillator for testing dissipative wavefunction collapse</div>
+        <div class="talk-venue">Redefining the Foundations of Physics · Trieste, Italy</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Aug 2019</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>An ultra-narrow linewidth levitated nano-oscillator for testing dissipative wavefunction collapse</div>
+        <div class="talk-venue">Taming Non-Equilibrium Systems · Trieste, Italy</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Aug 2016</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Optomechanical quantum non-demolition measurement of optical field fluctuations</div>
+        <div class="talk-venue">IQUOEMS · Erice, Sicily</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Nov 2015</div>
+      <div>
+        <div class="talk-title">Seminar: Optomechanics with MEMs — possible routes toward squeezed states</div>
+        <div class="talk-venue">Department of Physics &amp; Astronomy, UCL · London</div>
+      </div>
+    </li>
+
+    <li class="talk-item">
+      <div class="talk-date">Nov 2012</div>
+      <div>
+        <div class="talk-title"><span class="inv-badge">Invited</span>Opto-mechanical systems for light squeezing experiments</div>
+        <div class="talk-venue">INFN Legnaro National Laboratories · Legnaro, Italy</div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: CV
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="cv">
+  <div class="pg-header">
+    <span class="pg-eyebrow">Curriculum Vitae</span>
+    <h2>Antonio Pontin, Ph.D.</h2>
+  </div>
+
+  <div class="cv-section-title">Positions held</div>
+  <ul>
+    <li class="timeline-item">
+      <div class="tl-date">Oct 2023 –<br>Present</div>
+      <div>
+        <div class="tl-role">Researcher</div>
+        <div class="tl-org">CNR – Istituto Nazionale di Ottica, Sesto Fiorentino</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="tl-date">May 2019 –<br>Oct 2023</div>
+      <div>
+        <div class="tl-role">Research Associate</div>
+        <div class="tl-org">University College London, Department of Physics &amp; Astronomy</div>
+        <div class="tl-detail">Theoretical modelling of the roto-translational dynamics of non-spherical nanoparticles in cavity optomechanical setups; study of collapse models and their experimental investigation.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="tl-date">May 2017 –<br>May 2019</div>
+      <div>
+        <div class="tl-role">Marie-Curie Fellow</div>
+        <div class="tl-org">University College London</div>
+        <div class="tl-detail">Project QUCLN — Quantum control of levitated nanoparticles. International visits to JILA (Regal group), Yale (Harris group), University of Nevada Reno (Geraci group).</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="tl-date">Aug 2016 –<br>Apr 2017</div>
+      <div>
+        <div class="tl-role">Research Associate</div>
+        <div class="tl-org">University College London</div>
+        <div class="tl-detail">Design and characterisation of Paul traps; co-supervision of a Ph.D. student and master students.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="tl-date">May 2014 –<br>May 2016</div>
+      <div>
+        <div class="tl-role">Post-Doctoral Fellow</div>
+        <div class="tl-org">University of Florence, Department of Physics &amp; Astronomy</div>
+        <div class="tl-detail">Quantum optomechanics with MEMS oscillators; homodyne detection optimisation; time-series analysis code development; custom electronics design.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="tl-date">Nov 2005 –<br>Mar 2010</div>
+      <div>
+        <div class="tl-role">Research Technician</div>
+        <div class="tl-org">University of Trento, Low Temperatures Laboratory</div>
+        <div class="tl-detail">CAD and FEM design; mechanical amplification of displacement; high-sensitivity displacement measurement techniques.</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="cv-section-title">Education</div>
+  <ul>
+    <li class="timeline-item">
+      <div class="tl-date">Nov 2010 –<br>Mar 2014</div>
+      <div>
+        <div class="tl-role">Ph.D. in Physics</div>
+        <div class="tl-org">University of Trento — INFN scholarship</div>
+        <div class="tl-detail">Thesis: "Stabilized optomechanical systems for quantum optics"</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="tl-date">2007 – 2010</div>
+      <div>
+        <div class="tl-role">M.Sc. Physics — 110/110</div>
+        <div class="tl-org">University of Trento</div>
+        <div class="tl-detail">Experimental physics. Dissertation: "Development and test of new configurations of wide-band acoustic detectors for gravitational waves"</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="tl-date">2000 – 2005</div>
+      <div>
+        <div class="tl-role">B.Sc. Applied Physics — 106/110</div>
+        <div class="tl-org">University of Trento</div>
+        <div class="tl-detail">Materials physics. Dissertation: "Production and characterisation of a high quality factor superconducting LC resonator"</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="cv-section-title">Teaching &amp; Mentoring</div>
+  <ul>
+    <li class="timeline-item">
+      <div class="tl-date">UCL</div>
+      <div>
+        <div class="tl-role">Ph.D. and Master Supervision</div>
+        <div class="tl-detail">Supervised 3 Ph.D. students and 5 master students (one awarded prize for best thesis in cohort). Course support for PHAS2423 (Mathematical Methods for Theoretical Physics) and PHAS0006 (Thermal and Materials Physics).</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="tl-date">Sep 2021</div>
+      <div>
+        <div class="tl-role">Summer School Lecturer</div>
+        <div class="tl-org">Quantum Sensors for Fundamental Physics, Durham University</div>
+        <div class="tl-detail">Prepared and delivered problem-solving tutorials in support of Prof. Morley's (Warwick) lectures on "Macroscopic superpositions to test quantum gravity".</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="cv-section-title">International Schools</div>
+  <ul>
+    <li class="timeline-item">
+      <div class="tl-date">Aug 2013</div>
+      <div>
+        <div class="tl-role">Summer School — Quantum Optics and Nanophotonics</div>
+        <div class="tl-org">École de Physique des Houches, Les Houches, France</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: MEDIA
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="media">
+  <div class="pg-header">
+    <span class="pg-eyebrow">Media &amp; Outreach</span>
+    <h2>In the public eye</h2>
+  </div>
+
+  <p class="media-intro">Talks, interviews, and press coverage on the science of levitated optomechanics — from invited seminars to science journalism and international research collaborations.</p>
+
+  <div class="media-grid">
+
+    <!-- YouTube talk -->
+    <div class="media-card">
+      <a href="https://www.youtube.com/watch?v=NwRW4z8aO14" target="_blank" rel="noopener" class="media-card-thumb" style="text-decoration:none;background:#0c0c0c;position:relative;">
+        <img src="https://i.ytimg.com/vi/NwRW4z8aO14/hqdefault.jpg" alt="Talk thumbnail" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.85;" onerror="this.style.display='none'">
+        <span style="position:relative;z-index:1;color:#fff;font-size:2.8rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.7));">▶</span>
+      </a>
+      <div class="media-card-body">
+        <div class="media-card-tag">Invited Seminar · UniKORN</div>
+        <div class="media-card-title">Quadratic optomechanical cooling of a cavity-levitated nanosphere</div>
+        <div class="media-card-desc">UniKORN Frontiers Seminar series. I discuss our work on quadratic coupling in levitated optomechanics — trapping a nanosphere at a field antinode and exploiting the quadratic position–field interaction for non-Gaussian state preparation and cooling.</div>
+        <a class="media-card-link" href="https://www.youtube.com/watch?v=NwRW4z8aO14" target="_blank" rel="noopener">
+          Watch on YouTube ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- APS Physics Editors' Suggestion -->
+    <div class="media-card">
+      <div class="media-card-thumb" style="font-size:2.8rem;">⚛️</div>
+      <div class="media-card-body">
+        <div class="media-card-tag">Editors' Suggestion · APS Physics · 2019</div>
+        <div class="media-card-title">Dynamical Two-Path Interference in a Levitated Nanosphere</div>
+        <div class="media-card-desc">Our Physical Review A paper on two-path interference in a cavity-levitated nanoparticle was selected as an <em>Editors' Suggestion</em> and featured with a Synopsis on APS Physics — recognition awarded to fewer than 15% of published PRA articles.</div>
+        <a class="media-card-link" href="https://physics.aps.org/synopsis-for/10.1103/PhysRevA.100.012119" target="_blank" rel="noopener">
+          Read APS Physics synopsis ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- TEQ interview -->
+    <div class="media-card">
+      <div class="media-card-thumb" style="font-size:2.8rem;">🎙️</div>
+      <div class="media-card-body">
+        <div class="media-card-tag">Interview · TEQ Project · 2021</div>
+        <div class="media-card-title">Getting to know TEQ members: Antonio Pontin</div>
+        <div class="media-card-desc">A personal interview for the EC-funded TEQ Quantum Flagship project, covering my path into experimental physics, what draws me to quantum optomechanics, and the collaborative culture that drives the field forward.</div>
+        <a class="media-card-link" href="https://tequantum.eu/wp-content/uploads/2021/02/Getting-to-know-TEQ-members-Antonio-Pontin-UCL.pdf" target="_blank" rel="noopener">
+          Read interview (PDF) ↗
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="media-section-title">Press coverage — TEQ Quantum Flagship</div>
+  <p style="font-size:14px;color:var(--text-2);margin-bottom:16px;max-width:640px;">
+    The <a href="https://tequantum.eu" target="_blank" rel="noopener" style="color:var(--accent)">TEQ project</a> (Testing the large-scale limit of quantum mechanics), a European Quantum Flagship initiative I contributed to at UCL, attracted significant international press attention for its ambition to probe the quantum-to-classical boundary.
+  </p>
+  <ul class="media-press-list">
+    <li>
+      <span class="media-press-outlet">New Scientist</span>
+      <span>Cover feature on the search for the boundary between quantum and classical physics — with the TEQ experiment as a centrepiece.</span>
+    </li>
+    <li>
+      <span class="media-press-outlet">NY Times Magazine</span>
+      <span>In-depth feature on experiments attempting to observe quantum superposition in macroscopic objects.</span>
+    </li>
+    <li>
+      <span class="media-press-outlet">Smithsonian Magazine</span>
+      <span>Feature on the quest to understand why everyday objects behave classically despite quantum underpinnings.</span>
+    </li>
+    <li>
+      <span class="media-press-outlet">Scientific American</span>
+      <span>Coverage of efforts to test wave-function collapse models using levitated nanoparticles.</span>
+    </li>
+    <li>
+      <span class="media-press-outlet">La Repubblica</span>
+      <span>Italian national press feature on the TEQ collaboration and its Florence–UCL connection.</span>
+    </li>
+    <li>
+      <span class="media-press-outlet">GEO / Le Scienze</span>
+      <span>Popular-science coverage of the TEQ quantum experiment for general audiences.</span>
+    </li>
+  </ul>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE: CONTACT
+═══════════════════════════════════════════════════════════════ -->
+<div class="page-section" id="contact">
+  <div class="pg-header">
+    <span class="pg-eyebrow">Contact</span>
+    <h2>Get in touch</h2>
+  </div>
+
+  <div class="contact-block">
+    <div class="contact-row">
+      <span class="contact-label">Email</span>
+      <span class="contact-value"><a href="mailto:antonio.pontin@cnr.it">antonio.pontin@cnr.it</a></span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Institution</span>
+      <span class="contact-value">CNR – Istituto Nazionale di Ottica<br>Via Nello Carrara 1, 50019 Sesto Fiorentino, Italy</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Honorary</span>
+      <span class="contact-value">Department of Physics &amp; Astronomy<br>University College London, London WC1E 6BT, UK</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">Research area</span>
+      <span class="contact-value">Experimental quantum optomechanics,<br>levitated nanoparticles, fundamental physics</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     ROUTER
+═══════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  const sections = document.querySelectorAll('.page-section');
+  const navLinks = document.querySelectorAll('#main-nav a');
+
+  function navigate() {
+    const hash = window.location.hash || '#about';
+    const id   = hash.slice(1);
+
+    let found = false;
+    sections.forEach(s => {
+      const match = s.id === id;
+      s.hidden = !match;
+      if (match) {
+        found = true;
+        // trigger fade-in
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => s.classList.add('visible'));
+        });
+      } else {
+        s.classList.remove('visible');
+      }
+    });
+
+    // fallback to about
+    if (!found) {
+      const about = document.getElementById('about');
+      if (about) {
+        about.hidden = false;
+        requestAnimationFrame(() => requestAnimationFrame(() => about.classList.add('visible')));
+      }
+    }
+
+    navLinks.forEach(a => {
+      const active = a.getAttribute('href') === hash
+        || (hash === '#about' && a.getAttribute('href') === '#about');
+      a.classList.toggle('active', active);
+    });
+
+    window.scrollTo(0, 0);
+  }
+
+  // hide all initially
+  sections.forEach(s => { s.hidden = true; s.classList.remove('visible'); });
+
+  navigate();
+  window.addEventListener('hashchange', navigate);
+})();
+</script>
